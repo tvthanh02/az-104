@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AZ-104 Sổ tay ôn thi</title>
+  <meta name="description" content="Sổ tay ôn thi chứng chỉ Microsoft Azure Administrator (AZ-104) bằng tiếng Việt, bám sát Microsoft Learn, có theo dõi tiến trình học.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    try { var t = localStorage.getItem('az104.theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body>
+  <!-- Marker mũi tên dùng chung cho mọi sơ đồ SVG trong nội dung -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0 0L10 5L0 10z"/></marker>
+      <marker id="arr-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-a" d="M0 0L10 5L0 10z"/></marker>
+      <marker id="arr-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-s" d="M0 0L10 5L0 10z"/></marker>
+      <marker id="arr-x" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-x" d="M0 0L10 5L0 10z"/></marker>
+    </defs>
+  </svg>
+  <header class="topbar">
+    <button class="icon-btn menu-btn" data-act="menu" aria-label="Mở menu">☰</button>
+    <a class="brand" href="#/"><span class="brand-badge">AZ</span><span class="brand-text">AZ-104 <small>Sổ tay ôn thi</small></span></a>
+    <form class="search" id="searchForm" role="search">
+      <input id="searchInput" type="search" placeholder="Tìm kiến thức… (ví dụ: peering, SAS, LRS)" autocomplete="off">
+    </form>
+    <button class="icon-btn" data-act="theme" aria-label="Đổi giao diện sáng/tối" title="Sáng / tối">◐</button>
+  </header>
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Mục lục"></nav>
+    <div class="scrim" data-act="menu"></div>
+    <main id="main" class="main" tabindex="-1">
+      <div class="loading">Đang tải nội dung…</div>
+    </main>
+  </div>
+  <script src="content/curriculum.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

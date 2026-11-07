@@ -1,0 +1,800 @@
+[
+ {
+  "n": 385,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "NSG chỉ có thể gắn với subnet/NIC thuộc VNet cùng region (và cùng subscription) với NSG. Theo bảng, chỉ VNet3 cùng region với NSG1."
+ },
+ {
+  "n": 386,
+  "mod": "p3m4",
+  "status": "outdated",
+  "vi": "Theo đáp án cũ: xoá peering, thêm address space 10.33.0.0/16 vào VNet1, rồi tạo lại peering.",
+  "note": "Hiện nay có thể thêm/sửa/xoá address range của VNet đang peering mà không downtime: thêm address space rồi chọn Sync trên peering (cho mỗi VNet remote). Trình tự xoá–thêm–tạo lại không còn bắt buộc. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/virtual-network/update-virtual-network-peering-address-space",
+  "verified": true
+ },
+ {
+  "n": 387,
+  "mod": "p2m3",
+  "status": "ok",
+  "vi": "Có thể move storage account, NIC hay public IP sang resource group khác; resource vẫn giữ nguyên region (move RG không đổi location). Muốn đổi region phải dùng Azure Resource Mover/tạo lại."
+ },
+ {
+  "n": 388,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Bật VNet Integration cho webapp1 (kết nối webapp1 với VNET1) để web app truy cập được tài nguyên private như MySQL trên VM1."
+ },
+ {
+  "n": 389,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "VM1 đang ở trạng thái Stopped (deallocated); DSC extension cần VM đang chạy để agent cài đặt và liên lạc với Azure, nên phải Start VM1 trước."
+ },
+ {
+  "n": 390,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 391,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Với NSG ở cả subnet và NIC, traffic inbound phải được cả NSG subnet và NSG NIC cho phép; cần rule Allow TCP 3389 ở mọi NSG đang áp dụng (hoặc gỡ NSG không cần thiết). Thêm rule Allow TCP 3389 vào NSG-Subnet1 và gỡ NSG-VM1 khỏi NIC thì RDP thành công."
+ },
+ {
+  "n": 392,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Với NSG ở cả subnet và NIC, traffic inbound phải được cả NSG subnet và NSG NIC cho phép; cần rule Allow TCP 3389 ở mọi NSG đang áp dụng (hoặc gỡ NSG không cần thiết). Giải pháp này không mở được 3389 trên mọi NSG đang áp dụng nên RDP vẫn bị chặn."
+ },
+ {
+  "n": 393,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Với NSG ở cả subnet và NIC, traffic inbound phải được cả NSG subnet và NSG NIC cho phép; cần rule Allow TCP 3389 ở mọi NSG đang áp dụng (hoặc gỡ NSG không cần thiết). Giải pháp thêm rule Allow TCP 3389 đúng chỗ còn thiếu nên kết nối được."
+ },
+ {
+  "n": 394,
+  "mod": "p3m1",
+  "status": "ok",
+  "vi": "Muốn gán IP thuộc 192.168.1.0/24 phải thêm address space đó vào VNet trước; muốn dùng dải 10.2.1.0/24 thì cần tạo subnet tương ứng trong address space đã có."
+ },
+ {
+  "n": 395,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Một NSG có thể gắn cho nhiều subnet/NIC cùng region; với rule dùng địa chỉ IP tĩnh cụ thể, chỉ cần 1 NSG gắn vào tất cả subnet là đáp ứng mọi yêu cầu."
+ },
+ {
+  "n": 396,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Policy \"Not allowed resource types\" đang chặn Microsoft.Compute/virtualMachines nên phải bỏ loại này khỏi policy để tạo VM2; VNET1 đã tồn tại nên không cần bỏ virtualNetworks."
+ },
+ {
+  "n": 397,
+  "mod": "p3m3",
+  "status": "outdated",
+  "vi": "Azure CLI có lệnh import zone file nên chuyển 1.000 record với ít công sức nhất; Azure PowerShell không có cmdlet import/export.",
+  "note": "Docs hiện hành: \"Azure DNS supports importing and exporting zone files via the Azure CLI and the Azure portal\" (PowerShell vẫn không hỗ trợ). Vì vậy portal (C) cũng là cách hợp lệ; khẳng định \"chỉ CLI\" không còn đúng. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/dns/dns-import-export-portal",
+  "verified": true
+ },
+ {
+  "n": 398,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Inbound NAT rule ánh xạ một port trên frontend của Load Balancer tới một VM cụ thể (ở đây RDP 3389 tới VM3)."
+ },
+ {
+  "n": 399,
+  "mod": "p3m6",
+  "status": "outdated",
+  "vi": "Với Basic LB, backend pool chỉ gồm VM trong cùng một availability set hoặc scale set; Subnet12 chỉ dùng để cấp frontend IP cho ILB.",
+  "note": "Basic Load Balancer đã retire 30/9/2025; Standard LB cho phép bất kỳ VM nào trong cùng một VNet làm backend, nên các ô dựa trên giới hạn availability set của Basic không còn áp dụng. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/load-balancer/skus",
+  "verified": true
+ },
+ {
+  "n": 400,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "Chỉ private DNS zone mới link được với VNet và chỉ private DNS zone (link bật auto-registration) mới tự động đăng ký bản ghi của VM; public zone không link được với VNet."
+ },
+ {
+  "n": 401,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Trình tự S2S VPN: tạo GatewaySubnet → tạo VPN gateway → tạo local network gateway (đại diện thiết bị on-prem) → tạo connection."
+ },
+ {
+  "n": 402,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "NSG đã có rule outbound DenyWebSites chặn port 80 nhưng chưa gắn đúng chỗ; gắn NSG vào Subnet1 để áp dụng cho cả VM1 và VM2."
+ },
+ {
+  "n": 403,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Kết nối hai VNet khác tenant bằng VNet-to-VNet VPN cần tạo virtual network gateway ở mỗi VNet trước; address space không chồng lấn nên không cần sửa."
+ },
+ {
+  "n": 404,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "VM đặt trong Availability Zone phải dùng managed disks và chọn Availability options = Availability zone khi tạo."
+ },
+ {
+  "n": 405,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "VM có thể nằm ở resource group bất kỳ, nhưng muốn thêm vào VMSS (Flexible/VM orchestration) thì VM phải cùng region với scale set."
+ },
+ {
+  "n": 406,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "VNet peering không có tính bắc cầu (non-transitive): VNET1 peer với VNET2 và VNET3 nên giao tiếp với cả hai, còn VNET2 chỉ tới được VNET1."
+ },
+ {
+  "n": 407,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Mỗi máy client P2S dùng chứng chỉ self-signed phải cài client certificate (sinh từ root certificate đã upload lên VPN gateway). Sửa Azure AD authentication policy không giải quyết được."
+ },
+ {
+  "n": 408,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Mỗi máy client P2S dùng chứng chỉ self-signed phải cài client certificate (sinh từ root certificate đã upload lên VPN gateway). Join Computer2 vào Azure AD không cung cấp chứng chỉ client."
+ },
+ {
+  "n": 409,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Resource lock chỉ chống xoá/sửa tài nguyên, không thể tự thêm rule vào NSG mới. Để mọi NSG mới tự động có rule chặn TCP 8080 cần một custom Azure Policy definition (effect như append/modify/deployIfNotExists) gán ở scope subscription; không có built-in policy cho yêu cầu này."
+ },
+ {
+  "n": 410,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "VM1 đang dừng nên RDP không thể thành công dù rule NSG đã cho phép; bước đầu tiên là Start VM1."
+ },
+ {
+  "n": 411,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "VM ở VNET2/VNET3 muốn dùng DNS trên VM1 (VNET1) qua IP private thì các VNet phải thông nhau, nên cần peering VNET1 với VNET2 và VNET3."
+ },
+ {
+  "n": 412,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Kết quả IP flow verify/next hop của Network Watcher cho thấy NSG1 chặn traffic tới VM2 (không áp dụng cho VM1) và next hop là VM2 cùng VNet."
+ },
+ {
+  "n": 413,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Thêm rule Deny RDP 3389 từ Internet (priority cao hơn các rule allow) trong NSG gắn với Subnet1, vẫn cho phép 443 và RDP từ dải on-prem qua VPN."
+ },
+ {
+  "n": 414,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Application security group được gán qua IP configuration của NIC; muốn áp ASG1 cho VM1 thì associate NIC1 với ASG1."
+ },
+ {
+  "n": 415,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "VPN S2S song song với ExpressRoute cần: local network gateway, VPN gateway SKU không phải Basic (VpnGw1 trở lên) và một connection; GatewaySubnet đã có sẵn do ExpressRoute."
+ },
+ {
+  "n": 416,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Peering ở trạng thái Disconnected không còn chuyển traffic; phải xoá rồi tạo lại peering để trở về Initiated/Connected."
+ },
+ {
+  "n": 417,
+  "mod": "p3m6",
+  "status": "outdated",
+  "vi": "Theo đáp án cũ dựa trên Basic LB: backend phải cùng availability set/scale set và rule cần health probe để xác định backend khỏe.",
+  "note": "Basic Load Balancer đã retire 30/9/2025. Standard LB cho phép mọi VM trong cùng VNet và mặc định đóng inbound (\"closed to inbound flows unless allowed by a network security group\"), nên kết quả các ô có thể khác. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/load-balancer/skus",
+  "verified": true
+ },
+ {
+  "n": 418,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "VM1 có public IP dynamic (Basic SKU) không thể đứng sau Standard LB nên phải gỡ public IP; Standard LB mặc định secure-by-default nên cần tạo NSG cho phép traffic. (Basic public IP đã retire, nhưng nguyên tắc vẫn đúng.)"
+ },
+ {
+  "n": 419,
+  "mod": "p3m1",
+  "status": "ok",
+  "vi": "NIC phải được tạo cùng region và subscription với VNet mà nó kết nối; chỉ East US có VNet."
+ },
+ {
+  "n": 420,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "adatum.com là public zone; muốn Internet (và VM1) phân giải được thì phải ủy quyền (delegate) bằng cách cấu hình name servers của Azure DNS tại domain registrar."
+ },
+ {
+  "n": 421,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "IP flow verify cho biết rule NSG nào chặn gói tin; Connection troubleshoot kiểm tra kết nối outbound từ VM tới host bên ngoài."
+ },
+ {
+  "n": 422,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "DNS server cấu hình ở VNet là mặc định cho mọi VM; DNS server cấu hình trên NIC sẽ ghi đè cài đặt của VNet cho VM đó."
+ },
+ {
+  "n": 423,
+  "mod": "p2m3",
+  "status": "ok",
+  "vi": "Resource lock (CanNotDelete/ReadOnly) không ngăn việc move resource giữa các resource group; chỉ cần resource type hỗ trợ move."
+ },
+ {
+  "n": 424,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Standard LB chỉ nhận VM không có public IP hoặc có Standard SKU public IP; gắn Basic SKU public IP cho VM1 không giải quyết được (và Basic public IP nay đã retire)."
+ },
+ {
+  "n": 425,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Dừng VM2 không thay đổi SKU public IP của nó; VM vẫn có Basic public IP nên không thêm được vào backend pool của Standard LB."
+ },
+ {
+  "n": 426,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Khi mọi VM chỉ dùng Standard SKU public IP (hoặc không có public IP) và cùng VNet thì có thể thêm vào backend pool của Standard LB."
+ },
+ {
+  "n": 427,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Mỗi máy client P2S dùng chứng chỉ self-signed phải cài client certificate (sinh từ root certificate đã upload lên VPN gateway). Export client certificate từ Computer1 và cài lên Computer2 là đúng."
+ },
+ {
+  "n": 428,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Rule2 (priority 500) đang deny HTTPS; đổi Rule5 thành Allow với priority 401 (nhỏ hơn 500 nên được xét trước) sẽ cho phép 443."
+ },
+ {
+  "n": 429,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Unregister resource provider Microsoft.ClassicNetwork không liên quan tới NSG ARM. Để mọi NSG mới tự động có rule chặn TCP 8080 cần một custom Azure Policy definition (effect như append/modify/deployIfNotExists) gán ở scope subscription; không có built-in policy cho yêu cầu này."
+ },
+ {
+  "n": 430,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "VNet-to-VNet VPN cần GatewaySubnet trong address space còn trống; VNet peering chỉ yêu cầu address space không chồng lấn (có thể khác subscription/region)."
+ },
+ {
+  "n": 431,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Thêm rule deny 131.107.100.50 chỉ chặn thêm, không thể làm kết nối thành công. Rule BlockAllOther443 (priority 200) chặn mọi nguồn khác tới port 443, kể cả health probe từ AzureLoadBalancer (168.63.129.16) vì rule mặc định AllowAzureLoadBalancerInBound có priority 65001 thấp hơn; probe fail nên LB không chuyển traffic tới VM."
+ },
+ {
+  "n": 432,
+  "mod": "p3m2",
+  "status": "disputed",
+  "vi": "Rule BlockAllOther443 (priority 200, source Any) chặn cả health probe từ AzureLoadBalancer (168.63.129.16) vì rule mặc định AllowAzureLoadBalancerInBound có priority 65001 xét sau. Probe fail nên LB không chuyển traffic; xoá rule này thì probe qua được và client 131.107.100.50 vẫn được allow ở priority 100.",
+  "note": "Đáp án đúng là A (Yes). Docs: phải cho phép 168.63.129.16 trong NSG, nếu không \"the health probe fails ... Azure Load Balancer marks your instance as down\". Lời giải thích \"vấn đề ở chỗ khác\" của dump không đúng.",
+  "source": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+  "verified": true
+ },
+ {
+  "n": 433,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Rule Allow_131.107.100.50 đã có priority cao nhất (100); đổi priority không gỡ được việc health probe bị chặn. Rule BlockAllOther443 (priority 200) chặn mọi nguồn khác tới port 443, kể cả health probe từ AzureLoadBalancer (168.63.129.16) vì rule mặc định AllowAzureLoadBalancerInBound có priority 65001 thấp hơn; probe fail nên LB không chuyển traffic tới VM."
+ },
+ {
+  "n": 434,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Không có built-in policy nào tự thêm rule chặn TCP 8080 vào NSG. Để mọi NSG mới tự động có rule chặn TCP 8080 cần một custom Azure Policy definition (effect như append/modify/deployIfNotExists) gán ở scope subscription; không có built-in policy cho yêu cầu này."
+ },
+ {
+  "n": 435,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Với Azure CNI, mỗi pod nhận IP trực tiếp từ subnet của VNet nên client on-prem có thể kết nối tới IP của pod; kubenet dùng NAT cho pod."
+ },
+ {
+  "n": 436,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Gỡ public IP (Basic SKU) khỏi NIC của VM2 khiến cả hai VM không có public IP không tương thích, nên thêm được vào backend pool của Standard LB."
+ },
+ {
+  "n": 437,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Để mọi NSG mới tự động có rule chặn TCP 8080 cần một custom Azure Policy definition (effect như append/modify/deployIfNotExists) gán ở scope subscription; không có built-in policy cho yêu cầu này. Giải pháp này đáp ứng yêu cầu."
+ },
+ {
+  "n": 438,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Connection monitor theo dõi định kỳ khả năng kết nối và độ trễ (RTT) giữa VM nguồn và đích."
+ },
+ {
+  "n": 439,
+  "mod": "p3m6",
+  "status": "outdated",
+  "vi": "Basic LB: VM phải cùng availability set hoặc scale set; Standard LB: VM chỉ cần cùng một virtual network.",
+  "note": "Basic Load Balancer đã retire 30/9/2025; hiện chỉ dùng Standard LB nên vế về Basic không còn áp dụng. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/load-balancer/skus",
+  "verified": true
+ },
+ {
+  "n": 440,
+  "mod": "p3m4",
+  "status": "disputed",
+  "vi": "Mô hình dual-redundancy dùng 1 VPN gateway ở chế độ active-active (2 instance, mỗi instance một public IP) và 2 local network gateway + 2 connection cho 2 thiết bị on-premises, giúp failover nhanh hơn mức 1–3 phút của active-standby.",
+  "note": "Đáp án tối thiểu đúng: Public IP addresses = 2, Virtual network gateways = 1 (active-active), Local network gateways = 2. Docs: \"you set up the Azure VPN gateway in an active-active configuration. You create two local network gateways and two connections\". Dump ghi 2 virtual network gateway là sai.",
+  "source": "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-highlyavailable",
+  "verified": true
+ },
+ {
+  "n": 441,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "Azure-provided DNS trả về FQDN nội bộ dạng <vm>.internal.cloudapp.net khi reverse lookup IP private trong VNet."
+ },
+ {
+  "n": 442,
+  "mod": "p3m2",
+  "status": "disputed",
+  "vi": "Rule allow source AzureLoadBalancer ở priority 150 được xét trước BlockAllOther443 (priority 200), nên health probe qua được, LB đánh dấu VM healthy và kết nối từ 131.107.100.50 (đã allow ở priority 100) thành công.",
+  "note": "Đáp án đúng là A (Yes), nhất quán với câu 432 cùng series (\"cost\" ở đây tương đương priority). Docs yêu cầu cho phép 168.63.129.16 (service tag AzureLoadBalancer) trong NSG để health probe hoạt động.",
+  "source": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+  "verified": true
+ },
+ {
+  "n": 443,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Policy-based VPN gateway không hỗ trợ point-to-site; phải xoá GW1 và tạo route-based gateway (không chuyển đổi tại chỗ được)."
+ },
+ {
+  "n": 444,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "Auto-registration chỉ áp dụng cho VM trong VNet được link với chế độ registration; phân giải forward chỉ có cho VNet có link tới private zone."
+ },
+ {
+  "n": 445,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "Một VNet chỉ có thể là registration network cho một private DNS zone, nhưng có thể link resolution tới nhiều zone; một zone có thể có nhiều registration VNet."
+ },
+ {
+  "n": 446,
+  "mod": "p3m2",
+  "status": "outdated",
+  "vi": "Azure Bastion cần subnet riêng tên chính xác AzureBastionSubnet trong cùng VNet.",
+  "note": "Docs: với Bastion triển khai từ 2/11/2021, AzureBastionSubnet tối thiểu là /26 (hoặc lớn hơn). Đáp án 10.10.10.0/27 chỉ đúng với bản cũ; hiện cần chọn dải /26 trở lên. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/bastion/configuration-settings",
+  "verified": true
+ },
+ {
+  "n": 447,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Để kiểm tra (inspect) toàn bộ gói tin từ VM1 tới VM2 trong 3 giờ cần Network Watcher packet capture (giới hạn thời gian mặc định 5 giờ). Giải pháp đúng."
+ },
+ {
+  "n": 448,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Để kiểm tra (inspect) toàn bộ gói tin từ VM1 tới VM2 trong 3 giờ cần Network Watcher packet capture (giới hạn thời gian mặc định 5 giờ). Connection monitor chỉ đo reachability/latency, không bắt nội dung gói tin."
+ },
+ {
+  "n": 449,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Để kiểm tra (inspect) toàn bộ gói tin từ VM1 tới VM2 trong 3 giờ cần Network Watcher packet capture (giới hạn thời gian mặc định 5 giờ). Data Collector Set của Performance Monitor chỉ thu counter hiệu năng."
+ },
+ {
+  "n": 450,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Trình tự: gỡ public IP không tương thích khỏi VM → tạo health probe và backend pool trên lb1 → tạo load balancing rule (rule cần backend pool và probe có sẵn)."
+ },
+ {
+  "n": 451,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Để kiểm tra (inspect) toàn bộ gói tin từ VM1 tới VM2 trong 3 giờ cần Network Watcher packet capture (giới hạn thời gian mặc định 5 giờ). Metric Network In/Out chỉ cho số liệu lưu lượng tổng hợp."
+ },
+ {
+  "n": 452,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Thêm rule deny ở priority 64999 không mở thêm gì. Rule BlockAllOther443 (priority 200) chặn mọi nguồn khác tới port 443, kể cả health probe từ AzureLoadBalancer (168.63.129.16) vì rule mặc định AllowAzureLoadBalancerInBound có priority 65001 thấp hơn; probe fail nên LB không chuyển traffic tới VM."
+ },
+ {
+  "n": 453,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Trình tự Virtual WAN: tạo Virtual WAN → tạo virtual hub (kèm VPN gateway) → tạo VPN sites cho site1/site2 → kết nối VPN sites với hub."
+ },
+ {
+  "n": 454,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "VM dùng DNS server nào (cấu hình ở NIC ghi đè VNet) thì phân giải theo bản ghi của server đó; private zone chỉ phân giải được từ VNet có link tới zone khi dùng Azure-provided DNS."
+ },
+ {
+  "n": 455,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "VNet1 và VNet2 cùng address space 10.2.0.0/16 nên chồng lấn; phải sửa address space VNet1 trước khi peering (VNet1 chưa có thiết bị nên sửa được)."
+ },
+ {
+  "n": 456,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "Chỉ bản ghi A/CNAME trỏ đúng IP của VM2 mới dùng để ping được; theo bảng chỉ comp2.contoso.com phân giải tới VM2."
+ },
+ {
+  "n": 457,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Thêm rule với nguồn VM1, đích VM2, protocol ICMP, priority nhỏ hơn rule deny hiện có để cho phép ping theo least privilege; NSG stateful nên phản hồi tự động được phép."
+ },
+ {
+  "n": 458,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Mỗi máy client P2S dùng chứng chỉ self-signed phải cài client certificate (sinh từ root certificate đã upload lên VPN gateway). Đổi Startup type của IPSec Policy Agent không giải quyết được."
+ },
+ {
+  "n": 459,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 460,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Public Standard Load Balancer chỉ dùng public IP Standard SKU (static); IP Basic SKU không ghép được với Standard LB."
+ },
+ {
+  "n": 461,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Với kubenet, Azure Network Policy không được hỗ trợ; phải dùng Calico network policy để giới hạn traffic giữa các pod."
+ },
+ {
+  "n": 462,
+  "mod": "p3m5",
+  "status": "ok",
+  "vi": "Tạo route với address prefix 10.0.0.0/16, next hop Virtual appliance (IP VM1), và gắn route table vào GatewaySubnet để traffic vào từ VPN gateway đi qua VM1."
+ },
+ {
+  "n": 463,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 464,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "VM1 chỉ chịu NSG1 (default rules chặn inbound từ Internet) nên không RDP từ Internet được; VM2 có Rule1 cho 3389; VM trong cùng VNet giao tiếp được nhờ AllowVnetInBound."
+ },
+ {
+  "n": 465,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Load balancing rule bắt buộc tham chiếu frontend IP (đã có khi tạo LB), backend pool và health probe; nên cần tạo backend pool và health probe trước."
+ },
+ {
+  "n": 466,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "VPN gateway zone-redundant (AZ SKU) yêu cầu public IP Standard SKU, static assignment."
+ },
+ {
+  "n": 467,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "VNet dùng Azure-provided DNS và có link tới private zone thì phân giải được bản ghi zone; VNet dùng custom DNS server sẽ hỏi server đó thay vì private zone."
+ },
+ {
+  "n": 468,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "Gán role Owner cho VM không tạo bản ghi DNS; auto-registration chỉ có ở private zone có link VNet bật registration và đăng ký IP private của VM."
+ },
+ {
+  "n": 469,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "ErGw3AZ hỗ trợ ~10 Gbps, availability zones và FastPath; các SKU nhỏ hơn không hỗ trợ FastPath hoặc không có AZ."
+ },
+ {
+  "n": 470,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Traffic inbound phải được cả NSG ở subnet và NSG ở NIC cho phép; một deny ở bất kỳ tầng nào sẽ chặn kết nối."
+ },
+ {
+  "n": 471,
+  "mod": "p3m5",
+  "status": "ok",
+  "vi": "Route table RT1 gắn vào Subnet1/Subnet2 với next hop là virtual appliance VM3 (đã bật IP forwarding trên NIC và routing trong OS) nên traffic giữa các subnet đi qua VM3."
+ },
+ {
+  "n": 472,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Kết nối VNet tới mạng on-prem (SMB share) cần virtual network gateway (S2S VPN); webapp1 dùng VNet Integration để đi qua đó."
+ },
+ {
+  "n": 473,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Để cài NGINX tự động trên mọi instance của VM scale set khi triển khai bằng ARM template, dùng VM extension: Custom Script Extension hoặc DSC extension. Ở đây chọn Custom Script Extension."
+ },
+ {
+  "n": 474,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Service endpoint (Microsoft.Storage) trên subnet của VM1 giúp traffic từ VM tới storage1 đi qua Microsoft backbone thay vì Internet công cộng."
+ },
+ {
+  "n": 475,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Route-based S2S VPN với nhiều site on-prem dùng IKEv2 (IKEv1 chỉ phù hợp policy-based/hạn chế số kết nối); PPTP/L2TP không dùng cho S2S Azure."
+ },
+ {
+  "n": 476,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Khi failover sang VNet đích, ASR chọn subnet cùng tên với subnet nguồn; nếu không có thì chọn subnet đầu tiên theo thứ tự alphabet."
+ },
+ {
+  "n": 477,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 478,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Để cài NGINX tự động trên mọi instance của VM scale set khi triển khai bằng ARM template, dùng VM extension: Custom Script Extension hoặc DSC extension. Ở đây chọn DSC extension."
+ },
+ {
+  "n": 479,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 480,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Người dùng kết nối tới Azure Bastion qua TLS port 443 (RDP/SSH được đóng gói trong HTTPS); rule inbound cần cho phép 443 tới Bastion."
+ },
+ {
+  "n": 481,
+  "mod": "p3m1",
+  "status": "ok",
+  "vi": "Trong OS của DC1 để chế độ lấy IP tự động (DHCP), còn IP private tĩnh đặt ở cấu hình NIC trong Azure (10.0.1.3 thuộc dải Azure giữ lại, các IP khác nằm ngoài subnet); cấu hình VNET1 dùng custom DNS server trỏ tới DC1 để member server phân giải tên AD DS."
+ },
+ {
+  "n": 482,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 483,
+  "mod": "p3m5",
+  "status": "ok",
+  "vi": "Azure Firewall phải triển khai vào VNet cùng region và cùng resource group với firewall; chỉ VNET1 thoả cả hai điều kiện."
+ },
+ {
+  "n": 484,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Connection monitor là resource theo region; các VM nguồn nằm ở 2 region khác nhau nên cần tối thiểu 2 connection monitor."
+ },
+ {
+  "n": 485,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Template dùng giá trị của variable (không phải chuỗi \"netname\"), không chỉ định resource group và không tham chiếu parameter nào, nên cả ba nhận định đều No."
+ },
+ {
+  "n": 486,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Routing preference = Microsoft network routing của storage account khiến traffic vào từ Internet đi vào mạng Microsoft tại POP gần người dùng nhất (không liên quan Traffic Manager như giải thích gốc)."
+ },
+ {
+  "n": 487,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Rule outbound deny destination port 3389 trong NSG gắn vào NIC của VM1 chặn VM1 truy cập RDP của VM2 mà không ảnh hưởng VM khác."
+ },
+ {
+  "n": 488,
+  "mod": "p3m5",
+  "status": "ok",
+  "vi": "Để buộc traffic outbound của VNET1 đi qua Firewall1 phải tạo route table (UDR 0.0.0.0/0 next hop là IP private của firewall) và gắn vào subnet."
+ },
+ {
+  "n": 489,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Azure Bastion chỉ cung cấp RDP/SSH tới virtual machine; App Service hay DNS zone không được bảo vệ bởi Bastion."
+ },
+ {
+  "n": 490,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 491,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 492,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Bastion Basic cố định 2 instance (~40 SSH/instance); để phục vụ 100 phiên SSH cần host scaling, chỉ có ở Standard SKU, nên phải nâng cấp lên Standard trước."
+ },
+ {
+  "n": 493,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 494,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Kết nối từ client native (mstsc qua az network bastion rdp) cần Bastion Standard SKU → bật Native Client Support → chạy lệnh az network bastion rdp từ Azure CLI."
+ },
+ {
+  "n": 495,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 496,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Azure Bastion yêu cầu public IP Standard SKU, static, tier Regional; chỉ IP1 thoả mãn."
+ },
+ {
+  "n": 497,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 498,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 499,
+  "mod": "p2m3",
+  "status": "ok",
+  "vi": "Move VM sang subscription khác phải move cùng các resource phụ thuộc: disk, NIC và VNet mà NIC kết nối; storage1 không liên quan."
+ },
+ {
+  "n": 500,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 501,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 502,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence (sticky session) = Client IP hoặc Client IP and protocol đảm bảo các request từ cùng một client luôn được chuyển tới cùng một VM backend của Load Balancer. Các lựa chọn như Floating IP, health probe, idle timeout hay Protocol UDP không tạo ra affinity."
+ },
+ {
+  "n": 503,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Để cài NGINX tự động trên mọi instance của VM scale set khi triển khai bằng ARM template, dùng VM extension: Custom Script Extension hoặc DSC extension. Ở đây chọn DSC extension."
+ },
+ {
+  "n": 504,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Để cài NGINX tự động trên mọi instance của VM scale set khi triển khai bằng ARM template, dùng VM extension: Custom Script Extension hoặc DSC extension. Ở đây chọn Custom Script Extension."
+ },
+ {
+  "n": 505,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Multi-user authorization cho Recovery Services vault dựa trên Resource Guard; phải tạo Resource Guard trước rồi liên kết với vault."
+ },
+ {
+  "n": 506,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Rule BlockAllOther443 (priority 200) chặn mọi nguồn khác tới port 443, kể cả health probe từ AzureLoadBalancer (168.63.129.16) vì rule mặc định AllowAzureLoadBalancerInBound có priority 65001 thấp hơn; probe fail nên LB không chuyển traffic tới VM. Thêm rule allow AzureLoadBalancer priority 150 (trước rule deny 200) giúp probe thành công nên kết nối được."
+ },
+ {
+  "n": 507,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Service endpoint (Microsoft.Storage) trên subnet của VM1 giúp traffic từ VM tới storage1 đi qua Microsoft backbone thay vì Internet công cộng."
+ },
+ {
+  "n": 508,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "VM1 đang Stopped (deallocated); DSC extension cần VM đang chạy, nên phải Start VM1 trước."
+ },
+ {
+  "n": 509,
+  "mod": "p5m5",
+  "status": "outdated",
+  "vi": "Đáp án cũ dựa trên Consumption-only environment (subnet tối thiểu /23): chỉ VNet3 còn chỗ cho /23 nên chọn VNet3 only, /23.",
+  "note": "Hiện nay Workload profiles environment chỉ cần subnet tối thiểu /27 (delegate cho Microsoft.App/environments). Với các phương án có sẵn, subnet nhỏ nhất hợp lệ là /26 và VNet1 (còn trống 10.1.129.0/24) hoặc VNet3 đều được, VNet2 đã hết chỗ: đáp án theo docs hiện hành là \"VNet1 or VNet3 only\" + /26. /23 chỉ còn đúng với Consumption-only. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/container-apps/custom-virtual-networks",
+  "verified": true
+ },
+ {
+  "n": 510,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Azure Bastion hỗ trợ kết nối tới VM trong các VNet được peering, nên chỉ cần 1 Bastion host."
+ },
+ {
+  "n": 511,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Dùng mstsc (native client) qua Bastion cần Standard SKU và bật Native client support; Basic SKU chỉ kết nối qua Azure portal."
+ },
+ {
+  "n": 512,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Service endpoint policy chỉ gắn được cho subnet ở cùng region với policy; VNet ở region khác không áp dụng được Policy1."
+ }
+]

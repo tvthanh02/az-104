@@ -1,0 +1,785 @@
+[
+ {
+  "n": 129,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Storage Blob Data Contributor là data-plane role cho phép đọc, ghi, xóa blob trong container; các role như Contributor hay Storage Account Contributor chỉ là control-plane."
+ },
+ {
+  "n": 130,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Để gán role cho người khác cần quyền Microsoft.Authorization/roleAssignments/write (Owner hoặc User Access Administrator). Gán Owner ở scope VNet1 là đủ và hẹp nhất trong các lựa chọn."
+ },
+ {
+  "n": 131,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Group-based licensing chỉ áp dụng cho group có security enabled (security group, Microsoft 365 group bật security), không áp dụng cho distribution list hay group không bật security."
+ },
+ {
+  "n": 132,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Dynamic membership rule dùng (user.department -eq \"Marketing\") and (user.country -eq \"France\") để chỉ lấy người thuộc phòng Marketing tại Pháp."
+ },
+ {
+  "n": 133,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Trong Default user role permissions: đặt \"Users can register applications\" = No để chặn tạo service principal, và bật giới hạn truy cập Microsoft Entra admin center để user thường chỉ thao tác qua PowerShell/Microsoft Graph."
+ },
+ {
+  "n": 134,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Role assignment condition (ABAC) giới hạn hành động: đọc chỉ được trong container cont1, ghi chỉ với blob có tên khớp điều kiện; do đó User1 không đọc được Blob2/Blob3 ngoài phạm vi điều kiện."
+ },
+ {
+  "n": 135,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "New-MgUser tạo user thành viên (member), không gửi lời mời B2B; để tạo guest cho 500 người dùng bên ngoài cần New-MgInvitation (hoặc Bulk invite bằng CSV)."
+ },
+ {
+  "n": 136,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "New-AzDeployment là subscription-level deployment; template dùng copy loop với copyIndex() để tạo nhiều resource group, nên số lượng và tên RG phụ thuộc vào vòng lặp copy chứ không phải số khai báo."
+ },
+ {
+  "n": 137,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Private endpoint gán IP private từ VNet cho storage1 qua Azure Private Link, nên lưu lượng từ VM1 đến storage1 đi trên Microsoft backbone."
+ },
+ {
+  "n": 138,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Service endpoint mở rộng danh tính VNet tới Azure Storage và định tuyến lưu lượng từ subnet tới dịch vụ qua Azure backbone."
+ },
+ {
+  "n": 139,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Service endpoint đảm bảo lưu lượng từ subnet của VM1 tới storage1 đi qua Microsoft backbone thay vì internet."
+ },
+ {
+  "n": 140,
+  "mod": "p2m5",
+  "status": "outdated",
+  "vi": "Co-administrator là classic role chỉ gán được ở cấp subscription, nên theo đáp án cũ là C (Sub1).",
+  "note": "Classic administrator roles (Co-Administrator, Service Administrator) đã retire từ 31/8/2024; từ 12/2025 Azure tự chuyển thành Owner và từ 5/2026 tab Classic Administrators bị gỡ hẳn. Hiện nay dùng Azure RBAC (vd. Owner hoặc role hẹp hơn ở scope Sub1). Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/role-based-access-control/classic-administrators",
+  "verified": true
+ },
+ {
+  "n": 141,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "User có license (gán trực tiếp hay kế thừa) vẫn xóa được; nhưng group đang có license assignment thì không xóa được cho tới khi gỡ license khỏi group."
+ },
+ {
+  "n": 142,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Private endpoint cho storage1 đưa storage vào VNet bằng IP private, nên dữ liệu giữa VM1 và storage1 không đi qua internet."
+ },
+ {
+  "n": 143,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Role kế thừa xuống scope con: Contributor ở management group cho phép resize VM trong subscription con; Storage Account Contributor chỉ có hiệu lực ở scope được gán; User Access Administrator ở Tenant Root Group có thể gán role ở mọi subscription."
+ },
+ {
+  "n": 144,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Private endpoint dùng Private Link để truy cập storage1 qua IP private trong VNet, lưu lượng nằm trên Microsoft backbone."
+ },
+ {
+  "n": 145,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Bulk create user dùng file CSV mẫu từ portal; kết hợp group có Dynamic User membership theo thuộc tính department để tự động thêm user mà không cần thao tác thủ công."
+ },
+ {
+  "n": 146,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Key Vault managed storage account keys có thể tự động regenerate (rotate) access key của storage account theo chu kỳ."
+ },
+ {
+  "n": 147,
+  "mod": "p2m6",
+  "status": "ok",
+  "vi": "SSPR trong portal chỉ bật theo phạm vi None, Selected (group) hoặc All; không chọn từng user riêng lẻ, nên chỉ chọn được các group."
+ },
+ {
+  "n": 148,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Group naming policy cho Microsoft 365 group: tạo naming policy, đặt prefix kiểu Attribute, rồi chọn thuộc tính Department."
+ },
+ {
+  "n": 149,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "User luôn xóa được kể cả khi có license; group đang có license assignment thì không xóa được, nên chỉ các group không gán license mới xóa được."
+ },
+ {
+  "n": 150,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "App dùng managed identity để xác thực tới Key Vault mà không cần lưu secret; Key Vault cùng tenant có thể ở region/subscription khác nên dùng được secret từ bất kỳ vault nào."
+ },
+ {
+  "n": 151,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "External collaboration settings > Collaboration restrictions cho phép allow list domain (chỉ fabrikam.com) được mời làm guest."
+ },
+ {
+  "n": 152,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Role assignment condition chỉ hỗ trợ role có data action cho blob/queue, như Storage Blob Data Contributor và Storage Blob Data Owner."
+ },
+ {
+  "n": 153,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Custom security attributes: Global Administrator mặc định không có quyền gán; Attribute Definition Administrator chỉ định nghĩa, không gán; và custom security attribute chỉ gán cho user/service principal, không gán cho group."
+ },
+ {
+  "n": 154,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Theo cấu hình tenant trong exhibit, license chỉ gán trực tiếp được cho user (group-based licensing cần Microsoft Entra ID P1 và group bật security), nên chỉ User1 nhận license."
+ },
+ {
+  "n": 155,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Thiết lập SAS expiration policy (Allow recommended upper limit for SAS expiry interval) đặt giới hạn 7 ngày; tạo SAS vượt giới hạn sẽ nhận cảnh báo."
+ },
+ {
+  "n": 156,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Import/Export export chỉ hỗ trợ Azure Blob storage (GPv1/GPv2/Blob storage account), không export từ Azure Files hay archive tier."
+ },
+ {
+  "n": 157,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Tính năng tùy loại account: GPv2 hỗ trợ mọi dịch vụ và access tier; Blob storage account chỉ có blob; GPv1 không hỗ trợ tiering."
+ },
+ {
+  "n": 158,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Import/Export chỉ export được dữ liệu từ Azure Blob storage (container), không export file share, table hay database."
+ },
+ {
+  "n": 159,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "App1 có managed identity nên gán role qua Access Control (IAM), không cần secret; App2 cần quyền tạm 30 ngày nên dùng SAS có thời hạn."
+ },
+ {
+  "n": 160,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "StorageV2 (GPv2) hỗ trợ hot/cool/archive; Standard_GRS là lựa chọn rẻ nhất có bản sao ở region khác để chịu được sự cố toàn region."
+ },
+ {
+  "n": 161,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Triển khai Azure File Sync: cài Azure File Sync agent lên Server1, register server với Storage Sync Service, tạo sync group (cloud endpoint + server endpoint)."
+ },
+ {
+  "n": 162,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Policy \"Not allowed resource types\" chỉ chặn tạo/cập nhật resource; resource đã tồn tại (VM1 đang chạy) không bị dừng/deallocate, chỉ bị đánh dấu non-compliant."
+ },
+ {
+  "n": 163,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Import job: chuẩn bị ổ đĩa bằng WAImportExport (BitLocker), tạo import job trong portal, gửi ổ đĩa tới datacenter rồi cập nhật thông tin vận chuyển (tracking number)."
+ },
+ {
+  "n": 164,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Sync group chỉ có một cloud endpoint; một server chỉ có một server endpoint trong mỗi sync group, nhưng các server khác đã register có thể thêm endpoint."
+ },
+ {
+  "n": 165,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "UNC path của Azure file share có dạng \\\\<storageaccount>.file.core.windows.net\\<share>, tức \\\\contosostorage.file.core.windows.net\\data."
+ },
+ {
+  "n": 166,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "azcopy make tạo container mới bằng URL https://<account>.blob.core.windows.net/vmimages; VHD của image được lưu dưới dạng page blob."
+ },
+ {
+  "n": 167,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Thay đổi trực tiếp trên Azure file share (cloud endpoint) chỉ được phát hiện bởi change detection job chạy mỗi 24 giờ; thay đổi trên server endpoint được sync gần như ngay lập tức."
+ },
+ {
+  "n": 168,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Storage firewall chỉ cho phép subnet/IP được whitelist; subnet không có trong danh sách sẽ không truy cập được, còn Azure Backup cần bật ngoại lệ \"Allow trusted Microsoft services\"."
+ },
+ {
+  "n": 169,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Khi thêm server endpoint, Azure File Sync gặp xung đột cùng tên sẽ giữ cả hai file (đổi tên bản xung đột) thay vì ghi đè; file từ Share1 sẽ được sync xuống Share2."
+ },
+ {
+  "n": 170,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Live migration sang ZRS chỉ hỗ trợ Standard GPv2 (hoặc premium FileStorage/BlockBlobStorage) đang dùng LRS; account GRS/RA-GRS phải đổi về LRS trước."
+ },
+ {
+  "n": 171,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Chọn Selected networks và thêm dải IP 131.107.1.0/24 để upload; lưu lượng disk của VM không bị network rules ảnh hưởng nên không cần thêm VNet1."
+ },
+ {
+  "n": 172,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Thứ tự: cài Azure File Sync agent trên Server1, register Server1 với Storage Sync Service, rồi thêm server endpoint vào sync group."
+ },
+ {
+  "n": 173,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "ZRS sao chép đồng bộ qua 3 availability zone nên chịu được mất một datacenter; ZRS yêu cầu StorageV2 (GPv2)."
+ },
+ {
+  "n": 174,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Trước khi chạy WAImportExport để chuẩn bị ổ đĩa cần tạo dataset CSV (dữ liệu cần import) và driveset CSV (danh sách ổ đĩa)."
+ },
+ {
+  "n": 175,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Không xóa được Recovery Services vault khi còn backup item; trước tiên phải Stop backup cho từng item (rồi delete backup data)."
+ },
+ {
+  "n": 176,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Recovery Services vault phải cùng region với tài nguyên cần backup: Azure VM và Azure file share sao lưu được, blob container không backup vào Recovery Services vault."
+ },
+ {
+  "n": 177,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Import/Export chỉ import vào Azure Blob storage và Azure Files."
+ },
+ {
+  "n": 178,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "LRS giữ 3 bản sao trong một datacenter; muốn giảm chi phí cho dữ liệu ít truy cập thì đổi Access tier (Hot sang Cool)."
+ },
+ {
+  "n": 179,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "AzCopy v10 hỗ trợ copy dữ liệu tới Blob storage và Azure Files; không hỗ trợ Table và Queue."
+ },
+ {
+  "n": 180,
+  "mod": "p4m1",
+  "status": "outdated",
+  "vi": "Blob storage: dùng Microsoft Entra ID hoặc SAS. File storage: theo đáp án cũ chỉ dùng SAS.",
+  "note": "AzCopy hiện hỗ trợ Microsoft Entra ID cho lệnh nhắm vào file/directory trên Azure Files; SAS chỉ còn bắt buộc khi lệnh nhắm vào cả share hoặc account. Đáp án \"Files: SAS only\" không còn chính xác theo docs; Blob vẫn là Entra ID và SAS. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files",
+  "verified": true
+ },
+ {
+  "n": 181,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Azure Container Instances chỉ mount được Azure Files (SMB) làm volume lưu trữ bền vững."
+ },
+ {
+  "n": 182,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Planned maintenance được xử lý theo update domain; đặt VM1 và VM2 vào hai update domain khác nhau để không bị reboot cùng lúc."
+ },
+ {
+  "n": 183,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Import/Export import dữ liệu vào Azure Blob storage hoặc Azure Files."
+ },
+ {
+  "n": 184,
+  "mod": "p4m4",
+  "status": "disputed",
+  "vi": "Hai thao tác thực hiện trong Azure subscription là tạo Storage Sync Service rồi tạo sync group (kèm cloud endpoint trỏ tới file share). Cài Azure File Sync agent và Run Server Registration là thao tác trên Server1.",
+  "note": "Đáp án hợp lý hơn: First = Create a Storage Sync Service, Second = Create a sync group. Theo deployment guide, agent được cài trên Windows Server (Server1), không phải trong subscription; sync group và cloud endpoint được tạo trong Storage Sync Service trên Azure.",
+  "source": "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-deployment-guide",
+  "verified": true
+ },
+ {
+  "n": 185,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Sync group có đúng một cloud endpoint; server endpoint chỉ thêm được từ server đã register với Storage Sync Service (Server3 chưa register nên không thêm được)."
+ },
+ {
+  "n": 186,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Diagnostic settings gửi về storage account yêu cầu storage cùng region với vault; Log Analytics workspace có thể ở bất kỳ region/subscription nào."
+ },
+ {
+  "n": 187,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Premium file share chỉ có trên FileStorage account; tiering hot/cool/archive chỉ có trên GPv2/Blob storage và archive chỉ hỗ trợ LRS/GRS/RA-GRS."
+ },
+ {
+  "n": 188,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "SAS giới hạn theo IP range nên IP ngoài dải bị từ chối; mount file share qua SMB (net use) không dùng SAS mà cần storage account key hoặc identity-based auth."
+ },
+ {
+  "n": 189,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Một VM chỉ được backup vào một vault tại một thời điểm; phải stop backup VM2 trong RSV1 (và xóa dữ liệu) trước khi cấu hình backup sang RSV2."
+ },
+ {
+  "n": 190,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "ZRS chỉ hỗ trợ GPv2; phải upgrade GPv1 lên GPv2 trước, sau đó mới đổi replication sang ZRS."
+ },
+ {
+  "n": 191,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Lifecycle management hỗ trợ GPv2, Blob storage và premium block blob account; GPv1 không được hỗ trợ."
+ },
+ {
+  "n": 192,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Mount Azure file share qua SMB yêu cầu mở outbound TCP 445."
+ },
+ {
+  "n": 193,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Import/Export chỉ import vào Azure Blob storage hoặc Azure Files."
+ },
+ {
+  "n": 194,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Template có networkAcls defaultAction Allow và không có rule nên truy cập từ mọi mạng; từng blob có thể đặt Archive tier; truy cập blob trong portal bằng Entra ID cần thêm data role ngoài Reader."
+ },
+ {
+  "n": 195,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "AzCopy là công cụ đa nền tảng, chạy trên Windows, Linux và macOS."
+ },
+ {
+  "n": 196,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Immutable storage (time-based retention policy) cho container được cấu hình trong mục Access policy của container."
+ },
+ {
+  "n": 197,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Blob ở Cool đọc được ngay; blob ở Archive phải rehydrate trước khi đọc."
+ },
+ {
+  "n": 198,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Upload trong portal bằng Entra ID cần data role Storage Blob Data Contributor cộng với Reader (control-plane) để xem storage account trong portal."
+ },
+ {
+  "n": 199,
+  "mod": "p4m2",
+  "status": "disputed",
+  "vi": "Object replication chỉ hỗ trợ general-purpose v2 và premium block blob account (cả source lẫn destination), cần bật blob versioning ở cả hai và change feed ở source; đối tượng cần tạo ở account mới là container.",
+  "note": "Account type đúng là \"StorageV2 only\" (trong các phương án có sẵn); legacy BlobStorage không được hỗ trợ (\"Both the source and destination accounts must be either general-purpose v2 or premium block blob accounts\"). Object type: Container (đúng như dump).",
+  "source": "https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview",
+  "verified": true
+ },
+ {
+  "n": 200,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "azcopy copy <thư mục local> <URL container> --recursive copy toàn bộ nội dung thư mục lên container."
+ },
+ {
+  "n": 201,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "BlockBlobStorage là loại premium account; phải đổi Performance từ Standard sang Premium trước mới chọn được Account kind BlockBlobStorage."
+ },
+ {
+  "n": 202,
+  "mod": "p4m1",
+  "status": "outdated",
+  "vi": "Theo đáp án cũ, khi copy giữa các account phải gắn SAS token cho cả source (container1) và destination (share1).",
+  "note": "Docs hiện hành: copy giữa storage accounts có thể dùng Microsoft Entra ID cho cả source và destination (cùng tenant) hoặc gắn SAS; với Azure Files, lệnh nhắm tới file/directory cũng đã hỗ trợ Entra ID. SAS/SAS vẫn chạy được nhưng không còn là bắt buộc. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-copy",
+  "verified": true
+ },
+ {
+  "n": 203,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Encryption scope cho phép dùng key riêng ở cấp container hoặc blob; cần tạo encryption scope trước rồi gán khi tạo container."
+ },
+ {
+  "n": 204,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Lifecycle rule áp dụng theo prefix của container và số ngày từ lần sửa đổi; khi nhiều action cùng thỏa thì action rẻ nhất (delete, rồi archive, rồi cool) được áp dụng."
+ },
+ {
+  "n": 205,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "deleteRetentionPolicy 7 ngày nên blob xóa chỉ khôi phục được trong 7 ngày; allowBlobPublicAccess cho phép anonymous access; Standard_LRS giữ 3 bản sao trong một datacenter."
+ },
+ {
+  "n": 206,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "azcopy copy kèm --recursive là cách copy cả thư mục local lên blob container."
+ },
+ {
+  "n": 207,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Lifecycle rule dùng action tierToArchive (tier rẻ nhất) và filter prefixMatch \"container1/\" để chỉ áp dụng cho container1."
+ },
+ {
+  "n": 208,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Tạo Recovery Services vault, đặt Storage replication = ZRS (phải làm trước khi bảo vệ item), rồi tạo backup policy và bật backup cho VM1."
+ },
+ {
+  "n": 209,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Import/Export import dữ liệu vào Azure Blob storage hoặc Azure Files."
+ },
+ {
+  "n": 210,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Storage Explorer quản lý dữ liệu trong storage account có sẵn (blob, file, queue, table) nhưng không tạo được storage account."
+ },
+ {
+  "n": 211,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Gán role (data role) cho User1 qua Access Control (IAM); thực hiện customer-managed failover sang secondary trong mục Geo-replication/Redundancy của storage account."
+ },
+ {
+  "n": 212,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Customer-managed key cho Azure Storage chỉ hỗ trợ RSA/RSA-HSM key với độ dài 2048, 3072 hoặc 4096 bit."
+ },
+ {
+  "n": 213,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Account key cho toàn quyền trên mọi dịch vụ (bỏ qua RBAC); SAS chỉ cho phép dịch vụ, resource type và permission đã chọn trong SAS."
+ },
+ {
+  "n": 214,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Mỗi container tối đa 5 stored access policy; immutability chỉ có một time-based retention policy và một legal hold."
+ },
+ {
+  "n": 215,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Import/Export import vào Azure Blob storage hoặc Azure Files."
+ },
+ {
+  "n": 216,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Khi nhiều action của lifecycle cùng thỏa điều kiện, Azure áp dụng action rẻ nhất; delete rẻ hơn tierToArchive và tierToCool nên File1 bị xóa."
+ },
+ {
+  "n": 217,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Lifecycle management hỗ trợ GPv2, Blob storage, premium block blob; Archive tier chỉ hỗ trợ account LRS, GRS, RA-GRS (không có ZRS/GZRS/RA-GZRS)."
+ },
+ {
+  "n": 218,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Import/Export import vào Azure Blob storage hoặc Azure Files."
+ },
+ {
+  "n": 219,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Dùng điều kiện daysAfterModificationGreaterThan 45 và blobTypes blockBlob, vì tiering chỉ áp dụng cho block blob."
+ },
+ {
+  "n": 220,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Import/Export import vào Azure Blob storage hoặc Azure Files."
+ },
+ {
+  "n": 221,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "SMB Multichannel chỉ có trên premium file share (FileStorage); LRS là redundancy rẻ nhất."
+ },
+ {
+  "n": 222,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Import/Export import vào Azure Blob storage hoặc Azure Files."
+ },
+ {
+  "n": 223,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Role assignment condition hiện hỗ trợ role có data action của Blob storage và Queue storage."
+ },
+ {
+  "n": 224,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "AKS dùng kubenet có thể dùng subnet có sẵn của VNet, với điều kiện có route table trên subnet cluster."
+ },
+ {
+  "n": 225,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Desired State Configuration (DSC) extension trong ARM template cấu hình mọi VM trong scale set (cài NGINX) sau khi triển khai."
+ },
+ {
+  "n": 226,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Routing preference (Microsoft network vs Internet routing) ảnh hưởng chi phí egress; các thiết lập khác của exhibit quyết định tính năng account hỗ trợ."
+ },
+ {
+  "n": 227,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Customer-managed key cho storage dùng RSA key, độ dài tối đa hỗ trợ là 4096 bit."
+ },
+ {
+  "n": 228,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Role assignment condition (ABAC) có thể lọc theo blob index tags để user chỉ thấy blob khớp tag."
+ },
+ {
+  "n": 229,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Encryption scope chỉ áp dụng cho Blob storage (container/blob), không cho file share, table hay queue."
+ },
+ {
+  "n": 230,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Custom role: Microsoft.Storage/storageAccounts/read để xem cấu hình storage (least privilege) và Microsoft.Network/virtualNetworks/* để làm mọi thao tác trên VNet."
+ },
+ {
+  "n": 231,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Import/Export import vào Azure Blob storage hoặc Azure Files."
+ },
+ {
+  "n": 232,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Premium SSD ZRS chịu được mất datacenter/zone; host caching Read-only cho hiệu năng đọc cao mà không có rủi ro mất dữ liệu ghi như Read/Write khi host lỗi."
+ },
+ {
+  "n": 233,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Chuẩn bị Key Vault cho ADE với KEK: bật access policy \"Azure Disk Encryption for volume encryption\" và tạo key dùng làm KEK."
+ },
+ {
+  "n": 234,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Azure Disk Encryption mã hóa trong guest OS (BitLocker/DM-Crypt) cả OS và data disk, key lưu trong Key Vault, nên VHD tải về vẫn bị mã hóa."
+ },
+ {
+  "n": 235,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "SAS cho tải blob theo tên: Allowed resource types = Object, Allowed permissions = Read."
+ },
+ {
+  "n": 236,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "SAS cho phép chọn quyền Read, phạm vi toàn container và tùy chọn giao thức HTTPS and HTTP."
+ },
+ {
+  "n": 237,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Bật hierarchical namespace để dùng Data Lake Storage Gen2, Cool tier cho dữ liệu ít truy cập, GRS để tự động sao chép sang region phụ."
+ },
+ {
+  "n": 238,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Lifecycle policy có thể có action riêng cho snapshot và version; kết quả phụ thuộc filter container và số ngày trong policy của exhibit."
+ },
+ {
+  "n": 239,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Chuyển sang ZRS cần Standard GPv2 (hoặc premium block blob/file) đang dùng LRS; GPv1 hoặc account GRS phải chuyển đổi trước."
+ },
+ {
+  "n": 240,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Azure Storage Explorer chạy trên Windows, macOS và Linux."
+ },
+ {
+  "n": 241,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "LRS giữ tối thiểu 3 bản sao trong một datacenter; các thiết lập khác đọc từ exhibit tạo storage account."
+ },
+ {
+  "n": 242,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Blob inventory rule: blobTypes blockBlob, filter prefixMatch \"finance\", format CSV, schedule Daily, đích là container1."
+ },
+ {
+  "n": 243,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "SAS chỉ liệt kê và tải blob trong container: resource type Container, permissions Read và List."
+ },
+ {
+  "n": 244,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Rule không có prefix áp dụng cho mọi blob; khi nhiều action thỏa thì action rẻ nhất (delete) thắng nên File2 bị xóa trước khi vào Archive."
+ },
+ {
+  "n": 245,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Reader chỉ là control-plane, không có quyền đọc dữ liệu; khi tắt Shared Key access, Storage Account Contributor không thể dùng account key để đọc dữ liệu."
+ },
+ {
+  "n": 246,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Identity-based access với AD DS yêu cầu user là hybrid identity (đồng bộ lên Entra ID) và storage account đã bật nguồn AD DS tương ứng."
+ },
+ {
+  "n": 247,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Default share-level permission áp dụng cho authenticated identities được đồng bộ từ AD DS lên Entra ID; user không được sync hoặc cloud-only (không có trong AD DS) không truy cập được."
+ },
+ {
+  "n": 248,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Chỉ account Standard GPv2 (hoặc premium block blob/file) với LRS mới chuyển trực tiếp sang ZRS; theo bảng, chỉ storage1 thỏa."
+ },
+ {
+  "n": 249,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Reader and Data Access chỉ cho phép xem (list) key, không regenerate; cần Storage Account Key Operator Service Role (hoặc Storage Account Contributor)."
+ },
+ {
+  "n": 250,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Geo-replication của Azure Container Registry chỉ có ở Premium SKU, nên phải upgrade SKU trước."
+ },
+ {
+  "n": 251,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Mỗi container tối đa 5 stored access policy; immutability gồm tối đa một time-based retention policy và một legal hold, nên số có thể thêm phụ thuộc số đã có."
+ },
+ {
+  "n": 252,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Azure Disk Encryption không hỗ trợ một số kịch bản như Windows dynamic volume, M-series với Write Accelerator, Linux ephemeral OS disk; còn lại VM2 và VM3 mã hóa được."
+ },
+ {
+  "n": 253,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Theo yêu cầu trong case study, cont1 và các file share share1, share2 đáp ứng được; cont2 không thỏa yêu cầu."
+ },
+ {
+  "n": 254,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "az aks quản lý cluster (tạo, get-credentials...), không triển khai YAML; cần kubectl apply -f."
+ },
+ {
+  "n": 255,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "kubectl apply -f <file>.yaml là cách triển khai manifest YAML lên AKS."
+ },
+ {
+  "n": 256,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "azcopy dùng để copy dữ liệu storage, không triển khai YAML lên AKS."
+ }
+]

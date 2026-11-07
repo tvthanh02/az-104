@@ -1,0 +1,815 @@
+[
+ {
+  "n": 513,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "DSC extension được khai báo trong ARM template của VM scale set sẽ tự động áp cấu hình (cài NGINX) lên mọi VM khi triển khai và khi scale out. Các cmdlet như Publish-AzVMDscConfiguration chỉ upload script, còn Intune/Application Insights không dùng để cấu hình phần mềm cho VMSS."
+ },
+ {
+  "n": 514,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Trường DNS name label scope reuse chỉ xuất hiện khi chọn Networking type = Public, vì DNS name label gắn với public IP của container group."
+ },
+ {
+  "n": 515,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "VNet dùng Azure-provided DNS không thấy được zone tùy chỉnh trên DNS server của VM4; chỉ các VNet cấu hình custom DNS trỏ tới VM4 mới phân giải được bản ghi contoso.com theo đúng dữ liệu trong zone đó (đáp án No-Yes-No)."
+ },
+ {
+  "n": 516,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Trong ARM template, tài nguyên phụ thuộc phải được tạo trước: VNet (subnet) → NIC → VM, sau đó là các thành phần thu thập hiệu năng (storage account/extension chẩn đoán) phụ thuộc VM; thứ tự thể hiện qua dependsOn."
+ },
+ {
+  "n": 517,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "DSC extension được khai báo trong ARM template của VM scale set sẽ tự động áp cấu hình (cài NGINX) lên mọi VM khi triển khai và khi scale out. Các cmdlet như Publish-AzVMDscConfiguration chỉ upload script, còn Intune/Application Insights không dùng để cấu hình phần mềm cho VMSS."
+ },
+ {
+  "n": 518,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Azure Bastion kết nối được tới VM trong VNet chứa Bastion và các VNet được peer trực tiếp với nó; VM ở VNet không peer thì không truy cập được."
+ },
+ {
+  "n": 519,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "DSC extension được khai báo trong ARM template của VM scale set sẽ tự động áp cấu hình (cài NGINX) lên mọi VM khi triển khai và khi scale out. Các cmdlet như Publish-AzVMDscConfiguration chỉ upload script, còn Intune/Application Insights không dùng để cấu hình phần mềm cho VMSS."
+ },
+ {
+  "n": 520,
+  "mod": "p6m1",
+  "status": "outdated",
+  "vi": "Sau khi tạo Recovery Services vault, cần chuẩn bị hạ tầng đích (virtual network) trước khi triển khai appliance và bật replication cho VM VMware.",
+  "note": "Kịch bản dựa trên ASR VMware classic (configuration server triển khai từ OVA), đã bị khai tử tháng 3/2026; hiện ASR dùng modernized replication appliance và để migrate VMware Microsoft khuyến nghị Azure Migrate. Đáp án D/C vốn còn tranh cãi; nắm ý: vault → chuẩn bị VNet đích → deploy appliance. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/site-recovery/vmware-physical-azure-classic-deprecation",
+  "verified": true
+ },
+ {
+  "n": 521,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Host scaling và upload/download file yêu cầu Bastion Standard SKU (kèm Standard public IP); AzureBastionSubnet tối thiểu /26. Bastion ở VNet1 phục vụ được VNet2 qua peering."
+ },
+ {
+  "n": 522,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Traffic giữa hai VNet được peer luôn đi trên Microsoft backbone, không qua internet; đây là cách đơn giản nhất."
+ },
+ {
+  "n": 523,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "VNet peering yêu cầu address space không chồng lấn; VNet2 trùng dải địa chỉ với VNet1 nên chỉ VNet3 và VNet4 peer được."
+ },
+ {
+  "n": 524,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Azure Container Instances chỉ hỗ trợ triển khai vào VNet (private networking) cho container Linux; đổi OS type sang Linux mới chọn được Private."
+ },
+ {
+  "n": 525,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Azure Backup hỗ trợ VM Windows Server, Windows client 64-bit và các bản Linux được hỗ trợ, kể cả VM đang tắt; nên cả 4 VM (cùng region với vault) đều backup được."
+ },
+ {
+  "n": 526,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Đọc retention trong policy: điểm backup yearly giữ 10 năm, monthly giữ 36 tháng; khi một recovery point thuộc nhiều mức, áp dụng retention dài nhất."
+ },
+ {
+  "n": 527,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Recovery Services vault chỉ bảo vệ VM cùng region; VM3/VM4 ở region khác nên phải tạo vault mới ở region đó trước."
+ },
+ {
+  "n": 528,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Mỗi alert rule activity log chỉ có một signal nên cần 4 alert rule; action group gom theo tập người nhận khác nhau nên cần 3 action group."
+ },
+ {
+  "n": 529,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Email Azure Resource Manager Role chỉ gửi tới user Entra ID được gán role trực tiếp hoặc qua group; service principal không nhận email. Vì vậy User1 và User2 (thành viên Group1)."
+ },
+ {
+  "n": 530,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Đếm recovery point theo retention daily/weekly/monthly của policy tại từng thời điểm; các điểm trùng nhau chỉ tính một lần."
+ },
+ {
+  "n": 531,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Để giám sát mà không sửa code: với app trên VM/IIS dùng Application Insights Agent; với App Service bật Application Insights (auto-instrumentation) từ portal."
+ },
+ {
+  "n": 532,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Replace existing chỉ thay đĩa bằng dữ liệu từ recovery point; dữ liệu ghi sau thời điểm backup (file Budget.xls) bị mất nên phải chép lại."
+ },
+ {
+  "n": 533,
+  "mod": "p2m6",
+  "status": "ok",
+  "vi": "Phải xét SSPR áp dụng cho group nào và số phương thức yêu cầu; user không thuộc group được bật SSPR thì không reset được, và cấu hình phương thức SSPR thuộc quyền admin phù hợp."
+ },
+ {
+  "n": 534,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "User từng join được thiết bị nhưng nay thất bại thường do đạt giới hạn Maximum number of devices per user; tăng giá trị này (hoặc xóa thiết bị cũ) trong Device settings."
+ },
+ {
+  "n": 535,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Backup App Service chỉ cấu hình cho slot đang thiết lập (production), retention = 0 nghĩa là giữ vô thời hạn; slot test không được backup."
+ },
+ {
+  "n": 536,
+  "mod": "p2m6",
+  "status": "ok",
+  "vi": "Tài khoản admin luôn dùng policy SSPR mặc định (two-gate, không có security questions), khác với policy cho user; user đồng bộ từ on-premises cần password writeback."
+ },
+ {
+  "n": 537,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Người tạo tenant mới tự động là Global Administrator của tenant đó, nên User1 tạo được user trong external.contoso.onmicrosoft.com."
+ },
+ {
+  "n": 538,
+  "mod": "p3m8",
+  "status": "outdated",
+  "vi": "Theo đáp án cũ, Network Performance Monitor theo dõi latency giữa on-premises và Azure VM.",
+  "note": "Network Performance Monitor đã retire 29/2/2024 và không còn khả dụng; hiện dùng Connection monitor của Azure Network Watcher để đo latency/packet loss giữa on-premises và Azure VM. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/network-watcher/migrate-to-connection-monitor-from-network-performance-monitor",
+  "verified": true
+ },
+ {
+  "n": 539,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Đọc biểu đồ CPU với granularity 6 giờ (4 điểm/ngày); CPU chạm ngưỡng cao kéo dài thì nên scale up App Service plan."
+ },
+ {
+  "n": 540,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "File Recovery: chọn recovery point trong vault, tải script để mount recovery point thành ổ đĩa trên máy cục bộ, rồi chép file ra."
+ },
+ {
+  "n": 541,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Cần Recovery Services vault để chứa backup và backup policy đặt lịch 01:00, giữ 30 ngày."
+ },
+ {
+  "n": 542,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Sự kiện System event log được thu thập vào Log Analytics workspace, nên alert log search phải lấy workspace làm target."
+ },
+ {
+  "n": 543,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Azure Advisor (xem qua Cost Management > Advisor Recommendations) liệt kê unattached managed disk có thể xóa để tiết kiệm chi phí."
+ },
+ {
+  "n": 544,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Web server logging ghi raw HTTP request, bao gồm lỗi 500 ở mức web server; kết hợp Log stream để xem thời gian thực."
+ },
+ {
+  "n": 545,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Availability test (kể cả multi-step web test) là tính năng của Application Insights. Lưu ý multi-step web test classic đã deprecated, Microsoft khuyến nghị Standard test hoặc custom TrackAvailability."
+ },
+ {
+  "n": 546,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Bảng AzureActivity chứa activity log (thời gian, tên operation, resource bị ảnh hưởng); dùng where để lọc và project để chọn cột."
+ },
+ {
+  "n": 547,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Restore với Create new tạo VM mới từ recovery point 8 ngày trước trong khi VM1 vẫn chạy, nên giảm downtime; Replace existing cần dừng VM."
+ },
+ {
+  "n": 548,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Data source của DCR là VM/VMSS/Arc server (máy có thể cài Azure Monitor Agent); destination là Log Analytics workspace (hoặc Azure Monitor Metrics)."
+ },
+ {
+  "n": 549,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Quyền RBAC kế thừa từ scope cao xuống thấp: Owner ở subscription quản lý mọi thứ, Owner/Contributor ở RG chỉ trong RG đó, Owner trên VM chỉ VM đó."
+ },
+ {
+  "n": 550,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Custom role cho phép Microsoft.Compute/virtualMachines/* nhưng muốn tạo VM còn cần quyền trên network/storage; đối chiếu Actions/NotActions và AssignableScopes để trả lời."
+ },
+ {
+  "n": 551,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Traffic outbound từ VM chỉ xét outbound rules của NSG (stateful, chiều về tự cho phép); NSG gắn với subnet nào chỉ ảnh hưởng VM trong subnet đó."
+ },
+ {
+  "n": 552,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Khi topology thay đổi (thêm peering), client P2S Windows phải tải và cài lại gói VPN client configuration để nhận route mới tới VNet2."
+ },
+ {
+  "n": 553,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Virtual Machine Contributor quản lý VM nhưng không đăng nhập được; Virtual Machine User Login cho phép đăng nhập nhưng không quản lý disk/snapshot. Quyền kế thừa từ management group → subscription → RG."
+ },
+ {
+  "n": 554,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Gửi activity log của cả 10 subscription về một Log Analytics workspace để giám sát hoạt động người dùng tập trung."
+ },
+ {
+  "n": 555,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Azure Disk Backup dùng Backup vault: tạo Backup vault, tạo backup policy, cấp quyền (RBAC) cho managed identity của vault rồi cấu hình backup cho Disk2."
+ },
+ {
+  "n": 556,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Dùng service tag (AzurePortal/AzureCloud) làm Destination trong rule deny outbound để chặn Azure portal nhưng vẫn cho phép internet khác."
+ },
+ {
+  "n": 557,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Cú pháp KQL hợp lệ là search in (Event) \"error\"; các lựa chọn khác dùng SQL/PowerShell hoặc sai toán tử."
+ },
+ {
+  "n": 558,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Application Insights Profiler thu thập performance trace của ứng dụng đang chạy mà không ảnh hưởng người dùng."
+ },
+ {
+  "n": 559,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Backup App Service nên dùng storage account cùng subscription và cùng region với app để tránh phí truyền dữ liệu liên vùng."
+ },
+ {
+  "n": 560,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Activity log alert kích hoạt theo operation và scope: ghi disk/VM và ghi tag trên RG/VM đều tạo các write operation khớp cả Alert1 và Alert2."
+ },
+ {
+  "n": 561,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "DSC extension được khai báo trong ARM template của VM scale set sẽ tự động áp cấu hình (cài NGINX) lên mọi VM khi triển khai và khi scale out. Các cmdlet như Publish-AzVMDscConfiguration chỉ upload script, còn Intune/Application Insights không dùng để cấu hình phần mềm cho VMSS."
+ },
+ {
+  "n": 562,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Kết nối VNet1–VNet2 qua backbone dùng peering, không cần service endpoint; Microsoft.Storage một endpoint phủ mọi storage account, cộng Microsoft.AzureActiveDirectory là 2."
+ },
+ {
+  "n": 563,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Bước đầu khi map custom domain là tạo TXT record asuid (domain verification ID) để chứng minh sở hữu domain, sau đó mới tạo CNAME."
+ },
+ {
+  "n": 564,
+  "mod": "p3m8",
+  "status": "outdated",
+  "vi": "Network Insights/Traffic Analytics phân tích flow logs, nên bước đầu tiên là bật flow logs gửi vào Workspace1.",
+  "note": "NSG flow logs đã không cho tạo mới và sẽ retire 30/9/2027; hiện cần cấu hình Virtual network flow logs (kèm Traffic Analytics) thay cho NSG flow logs. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview",
+  "verified": true
+ },
+ {
+  "n": 565,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Alert processing rule Suppress notifications chỉ chặn thông báo (action group) trong khoảng thời gian chỉ định; alert vẫn được tạo và liệt kê."
+ },
+ {
+  "n": 566,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "GRS chỉ sao chép sang paired region (North Europe ↔ West Europe), không chọn được East US; object replication sao chép blob bất đồng bộ sang storage account ở region tùy chọn."
+ },
+ {
+  "n": 567,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Azure Monitor Agent cùng DCR có thể gửi dữ liệu tới nhiều Log Analytics workspace và thu thập toàn bộ Windows/security events; WAD và VM agent không đáp ứng."
+ },
+ {
+  "n": 568,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Action group định nghĩa hành động khi alert kích hoạt, bao gồm gọi Azure Function."
+ },
+ {
+  "n": 569,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Azure Monitor Network Insights cung cấp dashboard metrics và topology trực quan cho tài nguyên mạng, kể cả ExpressRoute, không cần cấu hình."
+ },
+ {
+  "n": 570,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "IP flow verify kiểm tra NSG cho phép/chặn gói tin theo port; Connection troubleshoot kiểm tra kết nối end-to-end giữa hai VM. Cả hai chẩn đoán được port 33000."
+ },
+ {
+  "n": 571,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Activity log alert gồm scope (resource), condition (operation xóa lock) và action group (gửi email)."
+ },
+ {
+  "n": 572,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Alert state (New/Acknowledged/Closed) do người dùng đổi thủ công, còn monitor condition (Fired/Resolved) do hệ thống đặt; đọc exhibit để chọn trạng thái có thể đổi."
+ },
+ {
+  "n": 573,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Đọc retention trong policy: yearly giữ 10 năm, monthly giữ 36 tháng; recovery point thuộc nhiều mức áp dụng retention dài nhất."
+ },
+ {
+  "n": 574,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "VM chỉ dùng được backup policy thuộc vault cùng region với VM, và policy phải đúng loại workload (Azure VM)."
+ },
+ {
+  "n": 575,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Để VM giao tiếp với Azure Monitor chỉ qua VNet, tạo Azure Monitor Private Link Scope (AMPLS) trước rồi mới tạo private endpoint gắn với AMPLS."
+ },
+ {
+  "n": 576,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Blob (operational/vaulted backup) dùng Backup vault; Azure Files share dùng Recovery Services vault."
+ },
+ {
+  "n": 577,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Backlogged Input Events cho biết số sự kiện đầu vào đang tồn đọng chưa được xử lý trong Stream Analytics job."
+ },
+ {
+  "n": 578,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Diagnostic settings gửi tới Log Analytics workspace cho phép chạy truy vấn KQL; storage account dùng lưu trữ, Event Hub dùng streaming."
+ },
+ {
+  "n": 579,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "DCR của Azure Monitor Agent lọc Windows event log bằng XPath query, ví dụ System!*[System[(EventID=1001)]]."
+ },
+ {
+  "n": 580,
+  "mod": "p3m8",
+  "status": "disputed",
+  "vi": "Connection monitor chỉ hỗ trợ máy on-premises đã onboard Azure Arc làm source endpoint; sau khi có Arc agent mới bật Azure Monitor Agent (extension, portal có thể tự cài).",
+  "note": "Theo docs hiện hành, thứ bắt buộc phải cài trên DC1 là Azure Connected Machine agent (Azure Arc) – phương án A: \"To monitor connectivity from the on-premises host, it must be enabled with Arc agent... You can escape the installation of the Azure Monitor Agent extension if you use the Azure portal... you still need to enable the Azure Arc agent\". AMA (D) là extension cài sau trên nền Arc. Đề thi cũ có thể chấm D.",
+  "source": "https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview",
+  "verified": true
+ },
+ {
+  "n": 581,
+  "mod": "p3m8",
+  "status": "outdated",
+  "vi": "Traffic Analytics phân tích flow logs; theo đáp án cũ cần bật NSG flow logs cho NSG1 gắn với NIC của VM1.",
+  "note": "NSG flow logs không còn cho tạo mới và sẽ retire 30/9/2027; hiện bật Virtual network flow logs cho VNet1 (hoặc subnet/NIC) và kích hoạt Traffic Analytics. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview",
+  "verified": true
+ },
+ {
+  "n": 582,
+  "mod": "p6m3",
+  "status": "outdated",
+  "vi": "Thu IIS logs bằng Azure Monitor Agent dựa trên Data Collection Rule với data source IIS Logs, gửi vào bảng W3CIISLog của Log Analytics workspace.",
+  "note": "Docs hiện hành: với AMA, DCE \"is only required if you're using Private Link\", và chỉ một số data source (Windows Firewall Logs, Prometheus) bắt buộc DCE; IIS logs không cần DCE. Bước cần thiết là tạo DCR với data source IIS Logs. Đáp án A theo yêu cầu cũ. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-endpoint-overview",
+  "verified": true
+ },
+ {
+  "n": 583,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Service endpoint chỉ áp dụng cho subnet được bật; service endpoint policy giới hạn subnet đó chỉ truy cập được storage account liệt kê trong policy."
+ },
+ {
+  "n": 584,
+  "mod": "p3m8",
+  "status": "disputed",
+  "vi": "Traffic Analytics phân tích flow logs (lưu trong Azure Storage) và ghi kết quả đã xử lý vào Log Analytics workspace, nên cần Log Analytics workspace và storage account.",
+  "note": "Đáp án đúng nên là A và C. Các thành phần của Traffic Analytics là Network Watcher, Log Analytics workspace và flow logs (flow data \"is sent to Azure Storage\"); không cần tạo Data Collection Rule.",
+  "source": "https://learn.microsoft.com/en-us/azure/network-watcher/traffic-analytics",
+  "verified": true
+ },
+ {
+  "n": 585,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Action group chứa danh sách người nhận (email User1, User2) và được gắn vào alert rule."
+ },
+ {
+  "n": 586,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Trong Device settings: đặt \"Users may join devices\" = Selected để chỉ user được chọn join, và bật yêu cầu MFA khi join/register thiết bị."
+ },
+ {
+  "n": 587,
+  "mod": "p2m3",
+  "status": "outdated",
+  "vi": "Theo đáp án cũ, đổi Service Administrator trong Properties của subscription.",
+  "note": "Classic administrator (Service Administrator/Co-Administrator) đã retire 31/8/2024 và gỡ hẳn khỏi portal từ 5/2026; hiện gán Owner qua Access control (IAM) (phương án C) và nhận cảnh báo outage qua Service Health alert. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/role-based-access-control/classic-administrators",
+  "verified": true
+ },
+ {
+  "n": 588,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Cần một Recovery Services vault cho mỗi region (3), và mỗi vault cần policy riêng cho VM và cho file share (6 policy)."
+ },
+ {
+  "n": 589,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Tạo Log Analytics workspace, cấu hình gửi dữ liệu (diagnostic settings/thu thập), rồi tạo alert rule dựa trên log."
+ },
+ {
+  "n": 590,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Resource Policy Contributor cho phép tạo policy/initiative definition; để gán initiative ở RG2 cần quyền tạo policy assignment (ví dụ Resource Policy Contributor hoặc Owner) ở scope RG2, theo least privilege."
+ },
+ {
+  "n": 591,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "RBAC share-level cho Azure Files chỉ có hiệu lực khi bật identity-based authentication (AD DS/Entra Domain Services/Entra Kerberos) trên storage account."
+ },
+ {
+  "n": 592,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Recovery Services vault là bước đầu tiên để backup Azure VM; policy được tạo trong vault."
+ },
+ {
+  "n": 593,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Azure Storage Explorer upload file trực tiếp vào Blob storage; map drive bằng key/SAS chỉ dùng cho Azure Files."
+ },
+ {
+  "n": 594,
+  "mod": "p4m1",
+  "status": "outdated",
+  "vi": "Theo case study cũ, disk của VM dùng unmanaged standard storage (page blob) nên Box 1 là Yes.",
+  "note": "Unmanaged disks đã retire hoàn toàn ngày 31/3/2026 (gia hạn từ 30/9/2025); sau ngày này không thể start VM dùng unmanaged disks. VM hiện phải dùng managed disks nên nhận định về \"unmanaged standard storage\" không còn áp dụng. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/virtual-machines/unmanaged-disks-deprecation",
+  "verified": true
+ },
+ {
+  "n": 595,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Chọn storage account theo account kind/performance: blob container cần account hỗ trợ blob (GPv2/BlockBlobStorage), file share cần GPv2 hoặc FileStorage."
+ },
+ {
+  "n": 596,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Object replication yêu cầu cả source và destination là GPv2 (hoặc premium block blob) có bật versioning; chọn đúng account đích theo planned changes."
+ },
+ {
+  "n": 597,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Storage account cho flow logs phải cùng region với tài nguyên được ghi log và là GPv2 để hỗ trợ retention; storage2 thỏa cả hai."
+ },
+ {
+  "n": 598,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "IP flow verify của Network Watcher cho biết gói tin tới/từ VM bị NSG rule nào cho phép hay chặn."
+ },
+ {
+  "n": 599,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Peering VNET1 với VNET3 là cách ít công sức nhất để hai VM ở hai VNet khác nhau giao tiếp bằng IP private."
+ },
+ {
+  "n": 600,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Site-to-site VPN cần virtual network gateway trong VNet và local network gateway đại diện thiết bị VPN on-premises, rồi tạo connection."
+ },
+ {
+  "n": 601,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Kiến trúc N-tier: đặt các tier vào subnet riêng có NSG, dùng load balancer phân phối traffic và VM trong availability set/zone để đáp ứng yêu cầu sẵn sàng."
+ },
+ {
+  "n": 602,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Người dùng truy cập web front end qua HTTPS nên cần inbound rule port 443 từ Internet, chỉ gắn NSG vào subnet web servers."
+ },
+ {
+  "n": 603,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "NSG là stateful: traffic trả về cho kết nối được phép tự động được cho qua; xét đúng chiều inbound/outbound và priority của rule."
+ },
+ {
+  "n": 604,
+  "mod": "p3m6",
+  "status": "outdated",
+  "vi": "Với Basic LB, backend chỉ chấp nhận VM trong cùng một availability set; VM có sẵn không thể thêm vào availability set nên phải redeploy.",
+  "note": "Basic Load Balancer đã retire 30/9/2025. Standard LB chấp nhận \"any virtual machines or virtual machine scale sets in a single virtual network\", nên bước cần làm là đưa VM2 vào VNET1 (phương án B), không cần redeploy vào availability set. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/load-balancer/skus",
+  "verified": true
+ },
+ {
+  "n": 605,
+  "mod": "p3m6",
+  "status": "outdated",
+  "vi": "Với Basic LB, VM1 và VM2 phải nằm trong cùng availability set; availability set chỉ chọn được lúc tạo VM nên phải redeploy.",
+  "note": "Basic Load Balancer đã retire 30/9/2025. Với Standard LB, backend pool chỉ yêu cầu VM cùng VNet, nên đáp án hợp lý hiện nay là kết nối VM2 vào VNET1/Subnet1 (phương án A). Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/load-balancer/skus",
+  "verified": true
+ },
+ {
+  "n": 606,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Peering VNET1 với VNET3 là cách ít công sức nhất để VM1 và VM4 giao tiếp; UDR hay NSG không tạo được kết nối giữa hai VNet."
+ },
+ {
+  "n": 607,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Lấy role có sẵn làm mẫu bằng Get-AzRoleDefinition -Name \"Reader\" | ConvertTo-Json, chỉnh sửa rồi tạo custom role bằng New-AzRoleDefinition."
+ },
+ {
+  "n": 608,
+  "mod": "p2m6",
+  "status": "ok",
+  "vi": "Dynamic group tự gom user phòng finance theo thuộc tính department, Conditional Access policy nhắm vào group đó để bắt buộc MFA."
+ },
+ {
+  "n": 609,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Lưu mật khẩu dạng secret trong Azure Key Vault (bật quyền cho ARM template deployment) rồi tham chiếu trong parameter file để tránh plain text."
+ },
+ {
+  "n": 610,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Đọc file Bicep: tên VNet là giá trị cố định, location lấy từ resourceGroup().location; trả lời theo đúng các tham số/biểu thức khai báo."
+ },
+ {
+  "n": 611,
+  "mod": "p6m3",
+  "status": "disputed",
+  "vi": "Docs: độ trễ trung bình để ingest log data là dưới 10 giây sau khi tới endpoint; Azure Monitor Agent upload phần lớn dữ liệu trong dưới 1 phút. Vì vậy log từ VM thường truy vấn được trong khoảng dưới 1 phút.",
+  "note": "Đáp án C (5–10 phút) không khớp docs hiện hành. Phương án gần nhất là A (1 phút); 5–10 phút chỉ gần với resource logs của dịch vụ Azure (3–10 phút), không phải dữ liệu agent từ VM. Câu hỏi có vẻ tự tạo nên đáp án \"chuẩn\" không chắc chắn.",
+  "source": "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-ingestion-time",
+  "verified": true
+ },
+ {
+  "n": 612,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Global Administrator, User Administrator, Directory Readers là built-in role của Entra ID; không có role tên \"Developer\" (chỉ có Application Developer)."
+ },
+ {
+  "n": 613,
+  "mod": "p2m3",
+  "status": "ok",
+  "vi": "Resource group gom các tài nguyên có cùng vòng đời để triển khai, giám sát, phân quyền và xóa chung."
+ },
+ {
+  "n": 614,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Azure Monitor là nền tảng tập trung thu thập, phân tích và phản ứng với telemetry từ Azure và on-premises; Log Analytics workspace chỉ là một thành phần của nó."
+ },
+ {
+  "n": 615,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Dung lượng tối đa mặc định của standard storage account là 5 PiB; muốn vượt mức mặc định phải liên hệ Azure Support. Các phương án khác (đổi replication, Premium, HNS, nâng GPv2) không thay đổi giới hạn này.",
+  "source": "https://learn.microsoft.com/en-us/azure/storage/common/scalability-targets-standard-account",
+  "verified": true
+ },
+ {
+  "n": 616,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Khi giảm retention trong backup policy, recovery point hết hạn được dọn (prune) trong vòng khoảng 24 giờ chứ không xóa ngay."
+ },
+ {
+  "n": 617,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "AzCopy với SAS token có thời hạn trên URL nguồn (và đích) thực hiện copy server-to-server trực tiếp giữa hai storage account, giới hạn quyền truy cập storage1 trong thời gian copy."
+ },
+ {
+  "n": 618,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "Lifecycle management rule tự động chuyển blob không sửa đổi quá 30 ngày từ Hot sang Archive."
+ },
+ {
+  "n": 619,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Map drive letter tới Azure file share dùng SMB qua TCP 445, cổng này hay bị ISP/tổ chức chặn; dùng VPN (S2S/P2S) hoặc ExpressRoute tới private endpoint giúp lưu lượng SMB đi qua đường hầm.",
+  "source": "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-networking-overview",
+  "verified": true
+ },
+ {
+  "n": 620,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Firewall storage chọn Selected networks và thêm IP public 131.107.1.5 để upload; bật ngoại lệ trusted Microsoft services để Import/Export và nền tảng Azure truy cập được account."
+ },
+ {
+  "n": 621,
+  "mod": "p4m2",
+  "status": "ok",
+  "vi": "File backup (.bacpac) là dữ liệu nhị phân không cấu trúc, phù hợp lưu trong Blob storage."
+ },
+ {
+  "n": 622,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Resize VM luôn khởi động lại VM; thêm data disk, cài extension hay đổi license type (Azure Hybrid Benefit) không cần restart."
+ },
+ {
+  "n": 623,
+  "mod": "p6m2",
+  "status": "disputed",
+  "vi": "Vault1 là resource Microsoft.RecoveryServices đã được tạo thành công, nên resource provider đó đã được đăng ký; backup Azure VM không cần MARS agent hay scale set.",
+  "note": "Đáp án E đáng ngờ: docs ghi \"When you create a resource in the Azure portal, the portal typically registers the resource provider for you\", nên tạo được Vault1 nghĩa là Microsoft.RecoveryServices đã đăng ký. Phương án hợp lý hơn là D (cấp quyền RBAC, vd. Backup Contributor, trên Vault1). Câu hỏi có vẻ tự tạo; chưa có doc nào chốt đáp án D.",
+  "source": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types",
+  "verified": true
+ },
+ {
+  "n": 624,
+  "mod": "p3m5",
+  "status": "ok",
+  "vi": "Azure Firewall phải triển khai vào subnet riêng tên AzureFirewallSubnet (tối thiểu /26)."
+ },
+ {
+  "n": 625,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Trước khi push phải tag image theo login server: docker tag image1:v1 registry1.azurecr.io/image1:v1, sau đó docker push."
+ },
+ {
+  "n": 626,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Theo đáp án gốc, chọn Inter-facet discovery để troubleshooter phát hiện vấn đề cấu hình trên nhiều loại resource trong RG1.",
+  "source": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/troubleshooting/overview",
+  "verified": false
+ },
+ {
+  "n": 627,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Logic App Contributor cho phép tạo và quản lý logic app, đúng nguyên tắc least privilege."
+ },
+ {
+  "n": 628,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "RA-GRS cho phép đọc dữ liệu từ secondary region; ứng dụng phải dùng secondary endpoint (-secondary) để đọc khi primary không khả dụng."
+ },
+ {
+  "n": 629,
+  "mod": "p2m6",
+  "status": "ok",
+  "vi": "Trong User risk policy, phần Access control đặt \"Require password change\" (kèm MFA) để user tự remediate bằng SSPR. Hiện Microsoft khuyến nghị cấu hình tương đương bằng Conditional Access."
+ },
+ {
+  "n": 630,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Gán role AcrPull cho system-assigned managed identity của VM1 để VM pull image từ registry mà không cần lưu credential."
+ },
+ {
+  "n": 631,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Bật backup cho VM1 trong Recovery Services vault và chọn backup policy; VM được bảo vệ qua vault."
+ },
+ {
+  "n": 632,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "Thay đổi replication (ví dụ LRS → ZRS) chỉ thay đổi cách sao chép dữ liệu, không \"di chuyển\" storage account sang availability zone khác."
+ },
+ {
+  "n": 633,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Theo đáp án của nguồn, mặc định Microsoft Entra Connect đồng bộ user, group và contact; computer/device chỉ được đồng bộ khi cấu hình hybrid join."
+ },
+ {
+  "n": 634,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Diagnostic settings của storage account gửi resource logs và metrics tới Log Analytics workspace."
+ },
+ {
+  "n": 635,
+  "mod": "p2m6",
+  "status": "outdated",
+  "vi": "User chưa có phương thức xác thực nào nên cần buộc họ đăng ký security info khi đăng nhập; combined registration cho phép đăng ký một lần cho cả MFA và SSPR.",
+  "note": "Combined registration đã được rollout cho mọi tenant và control chuyển đổi legacy/combined đã bị gỡ, nên không còn \"bật\" được. Hiện cần bật yêu cầu đăng ký SSPR khi sign-in (Password reset > Registration > Require users to register when signing in) hoặc dùng registration campaign. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-registration-mfa-sspr-combined",
+  "verified": true
+ },
+ {
+  "n": 636,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Quyền truy cập phụ thuộc loại SAS và role RBAC: user delegation SAS cần Entra ID; khi tắt shared key access thì account SAS/service SAS không hoạt động."
+ },
+ {
+  "n": 637,
+  "mod": "p5m1",
+  "status": "disputed",
+  "vi": "Nếu size mới không có trên hardware cluster đang chứa availability set thì phải deallocate tất cả VM trong availability set rồi mới resize được.",
+  "note": "Đáp án đúng là A (Shut down VM1, VM2, VM3). Docs: \"If the new size for a VM in an availability set isn't available on the hardware cluster currently hosting the VM, then you need to deallocate all VMs in the availability set to resize the VM.\"",
+  "source": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/resize-vm",
+  "verified": true
+ },
+ {
+  "n": 638,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "ACI và App Service hỗ trợ cả image Linux và Windows; Azure Container Apps chỉ chạy image Linux."
+ },
+ {
+  "n": 639,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "VNet peering hỗ trợ khác region, khác subscription và khác tenant miễn là address space không chồng lấn."
+ }
+]

@@ -1,0 +1,796 @@
+[
+ {
+  "n": 1,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Tags là cặp name/value gắn lên từng resource để phân loại logic (ví dụ Department=Sales) mà không cần di chuyển VM khỏi RG1. Management group hay resource group mới là quá mức cần thiết."
+ },
+ {
+  "n": 2,
+  "mod": "p2m6",
+  "status": "ok",
+  "vi": "Trang MFA per-user chỉ bật/tắt MFA cho từng user, không thể kết hợp điều kiện location không tin cậy và yêu cầu Azure AD-joined device. Yêu cầu này phải làm bằng Conditional Access policy."
+ },
+ {
+  "n": 3,
+  "mod": "p2m6",
+  "status": "ok",
+  "vi": "Session control chỉ giới hạn trải nghiệm phiên (sign-in frequency, app enforced restrictions…). Yêu cầu MFA và thiết bị Azure AD-joined thuộc về Grant control."
+ },
+ {
+  "n": 4,
+  "mod": "p2m6",
+  "status": "ok",
+  "vi": "Grant control của Conditional Access cho phép chọn \"Require multifactor authentication\" và \"Require Microsoft Entra hybrid joined/joined device\". Kết hợp với điều kiện Locations (untrusted) và nhóm Global Administrators là đáp ứng yêu cầu."
+ },
+ {
+  "n": 5,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Với Linux VM, thêm trusted root CA khi tạo máy được thực hiện bằng cloud-init, truyền qua tham số --custom-data của az vm create. New-AzureRmVm là AzureRM đã cũ, Create-AzVM không tồn tại."
+ },
+ {
+  "n": 6,
+  "mod": "p2m6",
+  "status": "outdated",
+  "vi": "Docs xác nhận không thể thay đổi usage model (per enabled user / per authentication) sau khi MFA provider đã được tạo, dù qua portal hay công cụ khác, nên đáp án B (No) đúng về mặt kỹ thuật.",
+  "note": "Đáp án B vẫn đúng nhưng kịch bản đã lỗi thời: từ 1/9/2018 không thể tạo MFA provider mới; MFA Server cũng đã ngừng hỗ trợ (30/9/2024). Hiện nay MFA đi kèm license Microsoft Entra ID P1/P2 và được bật bằng Conditional Access (hoặc Security defaults), không còn khái niệm usage model. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-authprovider",
+  "verified": true
+ },
+ {
+  "n": 7,
+  "mod": "p2m6",
+  "status": "outdated",
+  "vi": "Usage model của MFA provider không thể đổi sau khi tạo (docs: \"You can't change the usage model ... after an MFA provider is created\"), kể cả qua Azure CLI, nên đáp án là B (No).",
+  "note": "Đáp án B vẫn đúng nhưng khái niệm MFA provider/usage model đã lỗi thời: không tạo provider mới từ 1/9/2018, MFA Server ngừng hỗ trợ 30/9/2024. Hiện nay chỉ cần gán license Entra ID P1/P2 và dùng Conditional Access để yêu cầu MFA. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-authprovider",
+  "verified": true
+ },
+ {
+  "n": 8,
+  "mod": "p2m6",
+  "status": "outdated",
+  "vi": "Từ 1/9/2018 không thể tạo MFA auth provider mới và không còn hỗ trợ migration, nên giải pháp tạo provider mới từ bản backup không khả thi; đáp án B (No).",
+  "note": "Kịch bản dựa trên MFA provider/MFA Server đã khai tử (không tạo provider mới từ 1/9/2018; MFA Server ngừng 30/9/2024). Cách hiện hành: gán license Entra ID P1/P2 cho nhân viên mới và yêu cầu MFA qua Conditional Access. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-authprovider",
+  "verified": true
+ },
+ {
+  "n": 9,
+  "mod": "p2m1",
+  "status": "ok",
+  "vi": "Để đồng bộ ngay một thay đổi nhỏ (user mới) nên chạy Start-ADSyncSyncCycle -PolicyType Delta trên server Azure AD Connect. -PolicyType Initial là full sync, tốn thời gian nên không phải đáp án mong muốn."
+ },
+ {
+  "n": 10,
+  "mod": "p2m1",
+  "status": "ok",
+  "vi": "Replication Global Catalog chỉ diễn ra giữa các domain controller on-premises, không đẩy dữ liệu lên Azure AD. Việc đồng bộ lên cloud do Azure AD Connect (Start-ADSyncSyncCycle) đảm nhiệm."
+ },
+ {
+  "n": 11,
+  "mod": "p2m1",
+  "status": "ok",
+  "vi": "Restart dịch vụ NetLogon không kích hoạt chu kỳ đồng bộ của Azure AD Connect. Cần chạy Start-ADSyncSyncCycle -PolicyType Delta."
+ },
+ {
+  "n": 12,
+  "mod": "p4m1",
+  "status": "ok",
+  "vi": "RA-GRS (read-access geo-redundant storage) sao chép dữ liệu sang region thứ cấp và cho phép đọc từ region thứ cấp. GRS thường không cho đọc ở secondary; ZRS/LRS không trải qua hai vùng địa lý."
+ },
+ {
+  "n": 13,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Blade của Virtual Machine không hiển thị template đã dùng để triển khai. Template được lưu trong Deployments history của resource group."
+ },
+ {
+  "n": 14,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Resource group > Deployments lưu lịch sử triển khai; chọn deployment và View template để xem ARM template mà Jon Ross đã dùng."
+ },
+ {
+  "n": 15,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Blade Container (blob) chỉ quản lý dữ liệu blob, không chứa deployment history. Cần mở Deployments của resource group."
+ },
+ {
+  "n": 16,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Lỗi allocation khi resize VM trong availability set nghĩa là size mới cần cluster phần cứng khác; phải stop (deallocate) tất cả VM trong availability set rồi resize và khởi động lại."
+ },
+ {
+  "n": 17,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Data disk có thể detach và attach \"nóng\" khi VM đang chạy, nên bước đầu tiên là detach disk khỏi VM nguồn mà không cần dừng VM nào."
+ },
+ {
+  "n": 18,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Đặt platformFaultDomainCount ở giá trị tối đa mà region hỗ trợ (2 hoặc 3) để VM được trải trên nhiều fault domain nhất, giảm ảnh hưởng khi có sự cố phần cứng."
+ },
+ {
+  "n": 19,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Availability set hỗ trợ tối đa 20 update domain (mặc định 5). Đặt platformUpdateDomainCount = 20 giúp ít VM bị khởi động lại cùng lúc khi bảo trì."
+ },
+ {
+  "n": 20,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Lưu mật khẩu admin dưới dạng secret trong Azure Key Vault, cấp quyền (access policy / bật \"Azure Resource Manager for template deployment\") và tham chiếu secret qua parameter file, nên mật khẩu không nằm dạng plain text trong template."
+ },
+ {
+  "n": 21,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "File SetupComplete.cmd trong %windir%\\Setup\\Scripts tự chạy sau khi Windows Setup hoàn tất ở lần khởi động đầu, phù hợp để chạy script cấu hình cho VM mới tạo từ image."
+ },
+ {
+  "n": 22,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Add-AzVhd upload file .vhd từ on-premises lên Azure (storage blob hoặc managed disk) để tạo image/disk cho VM mới."
+ },
+ {
+  "n": 23,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Để replicate Hyper-V VM on-premises lên Azure bằng Azure Site Recovery cần: Recovery Services vault, Hyper-V site (đăng ký host qua Provider) và replication policy."
+ },
+ {
+  "n": 24,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Peering với gateway transit đã hoạt động (on-premises truy cập được VirtualNetworkB), nên bật lại Allow gateway transit không giải quyết vấn đề của client P2S."
+ },
+ {
+  "n": 25,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Allow gateway transit phải bật ở VNet có gateway (VirtualNetworkA), không phải VirtualNetworkB; hơn nữa transit đã hoạt động. Vấn đề nằm ở cấu hình VPN client cũ."
+ },
+ {
+  "n": 26,
+  "mod": "p3m4",
+  "status": "disputed",
+  "vi": "Docs P2S routing ghi rõ: khi thay đổi topology (thêm VNet peering), client Windows phải tải và cài lại VPN client package để nhận route mới. On-premises đã vào được VirtualNetworkB nên gateway transit đã hoạt động; chỉ còn thiếu bước cài lại client.",
+  "note": "Đáp án đúng là A (Yes). Docs: \"If you make a change to the topology of your network and have Windows VPN clients, the VPN client package for Windows clients must be downloaded and installed again\" (trang VNet peering cũng ghi P2S client phải tải lại sau khi cấu hình peering). Giải thích của dump (cần bật gateway transit) mâu thuẫn với dữ kiện on-premises đã truy cập được VirtualNetworkB.",
+  "source": "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-point-to-site-routing",
+  "verified": true
+ },
+ {
+  "n": 27,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Point-to-Site VPN cho phép từng máy client riêng lẻ (người làm việc từ xa) kết nối an toàn vào VNet. S2S/VNet-to-VNet/Multi-Site dùng để nối mạng với mạng."
+ },
+ {
+  "n": 28,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Listener của SQL Always On AG trên internal load balancer dùng TCP health probe (thường port 59999), không dùng HTTP probe trên port 1433."
+ },
+ {
+  "n": 29,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Session persistence = Client IP không phải là yêu cầu để cấu hình ILB làm listener cho availability group; cấu hình chuẩn là Floating IP (Direct Server Return) và TCP probe."
+ },
+ {
+  "n": 30,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Load balancing rule cho listener của SQL Always On AG phải bật Floating IP (Direct Server Return) để VM nhận traffic với IP frontend của listener."
+ },
+ {
+  "n": 31,
+  "mod": "p3m1",
+  "status": "outdated",
+  "vi": "Với VM Resource Manager hiện nay, IP private tĩnh được đặt trên IP configuration của NIC (Assignment = Static) qua portal, Set-AzNetworkInterfaceIpConfig/Set-AzNetworkInterface hoặc az network nic ip-config update; không đặt IP tĩnh trong guest OS.",
+  "note": "Set-AzureStaticVNetIP là cmdlet Azure Service Management cho classic VM; classic resources và Azure Service Manager đã retire (classic VM 9/2023, ASM 31/8/2024). Cách hiện hành: portal NIC > IP configurations > Static (gần nhất với phương án C) hoặc Set-AzNetworkInterfaceIpConfig. Không chọn D vì docs khuyến cáo không gán IP private tĩnh trong OS. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/virtual-networks-static-private-ip",
+  "verified": true
+ },
+ {
+  "n": 32,
+  "mod": "p3m1",
+  "status": "ok",
+  "vi": "Mỗi VM chỉ cần 1 NIC; một NIC có thể mang cả private IP và public IP. Vì vậy 5 VM cần tối thiểu 5 network interface."
+ },
+ {
+  "n": 33,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Một NSG có thể gắn vào subnet (hoặc nhiều NIC) và áp cùng bộ rule inbound/outbound cho cả 5 VM, nên chỉ cần 1 NSG."
+ },
+ {
+  "n": 34,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "File Recovery của Azure Backup mount recovery point qua script iSCSI, có thể khôi phục file trên bất kỳ máy nào có OS tương thích chứ không chỉ VM bị nhiễm."
+ },
+ {
+  "n": 35,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Khi VM bị ransomware, nên restore recovery point thành một VM mới (Create new VM) để không ghi đè hay phụ thuộc vào VM đang bị nhiễm."
+ },
+ {
+  "n": 36,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Azure Monitor thu thập và phân tích metrics của hạ tầng Azure (CPU, disk, network…) nên là công cụ để tìm nguyên nhân vấn đề hiệu năng."
+ },
+ {
+  "n": 37,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Azure VM backup hỗ trợ Windows 10/11 client 64-bit, Windows Server, các distro Linux được Azure endorse (Debian) và cả VM đang shut down/offline (snapshot crash-consistent), nên chọn tất cả A–E.",
+  "source": "https://learn.microsoft.com/en-us/azure/backup/backup-support-matrix-iaas",
+  "verified": true
+ },
+ {
+  "n": 38,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "New-AzureADUser tạo user nội bộ (member), không tạo guest B2B. Để tạo guest cho người dùng bên ngoài phải gửi invitation."
+ },
+ {
+  "n": 39,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Bulk create tạo member user trong tenant. Với người dùng bên ngoài phải dùng Bulk invite users để tạo guest account."
+ },
+ {
+  "n": 40,
+  "mod": "p2m2",
+  "status": "outdated",
+  "vi": "Gửi lời mời B2B cho từng user trong CSV bằng cmdlet invitation sẽ tạo guest account trong contoso.com, nên giải pháp đạt mục tiêu (Yes).",
+  "note": "Ý tưởng vẫn đúng nhưng module AzureAD PowerShell (New-AzureADMSInvitation) đã deprecated từ 30/3/2024 và chỉ còn chạy tới 30/3/2025. Cmdlet hiện hành là New-MgInvitation (Microsoft Graph PowerShell) hoặc bulk invite trong Entra admin center. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/powershell/azure/active-directory/overview",
+  "verified": true
+ },
+ {
+  "n": 41,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Recovery Services vault chỉ bảo vệ VM cùng region với vault. VM3 và VM4 ở region khác nên trước tiên phải tạo một Recovery Services vault mới trong region đó."
+ },
+ {
+  "n": 42,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Network Contributor cho phép quản lý tài nguyên mạng như load balancer; gán ở phạm vi hẹp nhất cần thiết (từng LB hoặc RG) để tuân thủ least privilege."
+ },
+ {
+  "n": 43,
+  "mod": "p2m5",
+  "status": "outdated",
+  "vi": "Trước đây Azure AD integration (legacy) chỉ bật được lúc tạo cluster nên phải recreate AKS1. Hiện nay AKS-managed Microsoft Entra integration bật được trên cluster đang chạy bằng az aks update --enable-aad.",
+  "note": "Docs hiện hành: \"Enable Microsoft Entra integration on your existing Kubernetes RBAC enabled cluster using az aks update\" và có thể migrate cluster legacy bằng cùng lệnh, nên không cần recreate cluster hay tạo OAuth endpoint. Đáp án B của dump vốn đã đáng ngờ (đáp án kinh điển cũ là C – Recreate AKS1). AKS hiện không còn là trọng tâm của AZ-104. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/aks/entra-id-control-plane-authentication",
+  "verified": true
+ },
+ {
+  "n": 44,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Expiration policy chỉ áp dụng cho Microsoft 365 group (không áp dụng cho Security group); Microsoft 365 group kiểu Assigned hoặc Dynamic User đều tự xoá sau 180 ngày nếu cấu hình."
+ },
+ {
+  "n": 45,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Access review được giới hạn cho Guest users only, nên các member user không nằm trong phạm vi review; owner của group chỉ review được thành viên guest trực tiếp theo cấu hình."
+ },
+ {
+  "n": 46,
+  "mod": "p2m3",
+  "status": "ok",
+  "vi": "Policy gán ở management group được kế thừa xuống subscription con; Deny (Not allowed) thắng Allowed. Một subscription chỉ thuộc một management group duy nhất."
+ },
+ {
+  "n": 47,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Policy deny tạo SQL server ở phạm vi Subscription 1 nhưng có exclusion ContosoRG1, nên chỉ tạo được SQL server trong ContosoRG1."
+ },
+ {
+  "n": 48,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Tag của resource group không tự kế thừa xuống resource. Policy gắn tag chỉ áp dụng cho resource mới tạo/cập nhật, nên VNET1 giữ tag cũ và VNET2 nhận tag từ policy."
+ },
+ {
+  "n": 49,
+  "mod": "p2m3",
+  "status": "ok",
+  "vi": "VM cùng managed disk, storage account, VNet và Recovery Services vault đều hỗ trợ move sang subscription khác (với các điều kiện kèm theo)."
+ },
+ {
+  "n": 50,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Lỗi \"Legal terms have not been accepted\" xử lý bằng cách chấp nhận điều khoản Marketplace cho subscription: Set-AzMarketplaceTerms -Accept (hoặc az vm image terms accept)."
+ },
+ {
+  "n": 51,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Gán Microsoft Entra role (User Administrator) từ trang user > Directory role / Assigned roles > Add assignment."
+ },
+ {
+  "n": 52,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Để dùng tính năng Premium P2, mỗi user phải được gán license P2 từ Licenses blade (trực tiếp hoặc qua group-based licensing)."
+ },
+ {
+  "n": 53,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "IT Service Management Connector (ITSMC) kết nối Azure Monitor alerts với System Center Service Manager để tạo work item tự động; cần triển khai trước khi tạo alert."
+ },
+ {
+  "n": 54,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Devices > Device settings cho phép thêm user vào nhóm local administrator trên mọi thiết bị Azure AD-joined (Additional local administrators / Device Administrator role)."
+ },
+ {
+  "n": 55,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Group có thể chứa cả device registered lẫn joined; chỉ role có quyền quản lý device (Global Admin, Cloud Device Admin, Intune Admin) hoặc owner của group mới thêm được device vào group."
+ },
+ {
+  "n": 56,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Recovery Services vault đang chứa backup item (SQLDB01) chặn việc xoá vault và resource group; phải stop backup và xoá dữ liệu backup trước."
+ },
+ {
+  "n": 57,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Để gán role cho người khác cần quyền Microsoft.Authorization/roleAssignments/write – có trong User Access Administrator (hoặc Owner). Network Contributor/Contributor không có quyền này."
+ },
+ {
+  "n": 58,
+  "mod": "p2m1",
+  "status": "ok",
+  "vi": "Để verify custom domain trong Microsoft Entra ID, tạo bản ghi TXT hoặc MX với giá trị do Azure cung cấp trong DNS zone công khai; trong các lựa chọn chỉ có MX."
+ },
+ {
+  "n": 59,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "DevTest Labs User chỉ cho phép thao tác với VM trong DevTest Labs, không có quyền tạo Logic App."
+ },
+ {
+  "n": 60,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Logic App Operator chỉ đọc, bật/tắt và chạy lại logic app, không tạo được logic app mới."
+ },
+ {
+  "n": 61,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Contributor trên resource group Dev cho phép tạo và quản lý mọi loại resource (bao gồm Logic App) trong Dev."
+ },
+ {
+  "n": 62,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Gắn tag Department cho từng resource, rồi dùng Cost Management (Cost analysis) lọc/nhóm theo tag và export báo cáo cho bộ phận tài chính."
+ },
+ {
+  "n": 63,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Trong KQL, search in (Event) \"error\" tìm chuỗi \"error\" trong bảng Event. Các lựa chọn khác là cú pháp PowerShell/SQL không hợp lệ."
+ },
+ {
+  "n": 64,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Template triển khai các VM vào các availability zone khác nhau (Zone 1, Zone 2) nên chúng nằm ở datacenter tách biệt; tuy nhiên zone không bảo vệ khi cả region gặp sự cố."
+ },
+ {
+  "n": 65,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Di chuyển web app sang resource group khác không đổi region; App Service plan giữ nguyên West Europe. Policy gán ở RG đích (Policy2) sẽ áp dụng cho app sau khi move."
+ },
+ {
+  "n": 66,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "AssignableScopes đặt là /subscriptions/<id> để role chỉ gán được trong Subscription1; NotActions = Microsoft.Authorization/* để chặn quản lý quyền, còn Actions = * cho phép quản lý resource."
+ },
+ {
+  "n": 67,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "User truy cập qua VPN (mạng private) nên cần dịch vụ cân bằng tải nội bộ: internal load balancer (layer 4) hoặc Application Gateway (layer 7, có thể dùng frontend private IP)."
+ },
+ {
+  "n": 68,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Azure Advisor (Cost recommendations) xác định VM không được sử dụng hết để đề xuất resize/shutdown, giúp giảm chi phí."
+ },
+ {
+  "n": 69,
+  "mod": "p2m6",
+  "status": "ok",
+  "vi": "Policy MFA tối thiểu cần: Users (All users), Target resources/Cloud apps (Microsoft Azure Management / Azure portal) và Grant (Require MFA)."
+ },
+ {
+  "n": 70,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Lỗi Generic authorization exception khi mời guest thường do External collaboration settings giới hạn ai được mời hoặc chặn domain; sửa trong External collaboration settings."
+ },
+ {
+  "n": 71,
+  "mod": "p2m3",
+  "status": "ok",
+  "vi": "Mặc định không ai có quyền ở root management group; Global Administrator phải bật \"Access management for Azure resources\" (elevate access) để nhận User Access Administrator ở root, sau đó gán policy/role."
+ },
+ {
+  "n": 72,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Dynamic group đánh giá membership rule theo thuộc tính user; user được thêm vào mọi group có rule khớp với thuộc tính của nó."
+ },
+ {
+  "n": 73,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Thuộc tính như JobTitle của user đồng bộ từ AD on-premises phải sửa ở AD on-premises; UsageLocation là thuộc tính chỉ có ở Entra ID nên sửa được cho mọi user."
+ },
+ {
+  "n": 74,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Để bật Traffic Analytics, tài khoản cần role Owner, Contributor hoặc Network Contributor ở scope subscription (hoặc custom role có quyền tương ứng); Network Contributor đáp ứng."
+ },
+ {
+  "n": 75,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Owner ở mức subscription có đủ quyền ghi để cấu hình flow logs và Traffic Analytics."
+ },
+ {
+  "n": 76,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Reader chỉ có quyền đọc, không thể ghi cấu hình flow log/Traffic Analytics nên không đủ để bật tính năng."
+ },
+ {
+  "n": 77,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Virtual Machine Contributor không quản lý được VNet; Owner thừa quyền. Contributor là role built-in nhỏ nhất đáp ứng cả triển khai VM lẫn quản lý VNet."
+ },
+ {
+  "n": 78,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Azure RBAC và Microsoft Entra roles độc lập; Global Administrator bật elevate access sẽ có User Access Administrator ở root scope, từ đó gán được role cho Azure resource."
+ },
+ {
+  "n": 79,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Trước hết bật system-assigned managed identity cho VM1, sau đó mới gán role cho identity đó trên RG1 qua Access control (IAM)."
+ },
+ {
+  "n": 80,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Resource lock (Delete/ReadOnly) trên VNET1 và Recovery Services vault còn dữ liệu backup đều chặn xoá resource group; phải gỡ lock và xoá dữ liệu backup trong Vault1."
+ },
+ {
+  "n": 81,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "Delegate subdomain bằng cách tạo bản ghi NS tên \"research\" trong zone adatum.com, trỏ tới name server của zone research.adatum.com."
+ },
+ {
+  "n": 82,
+  "mod": "p2m1",
+  "status": "ok",
+  "vi": "Thứ tự: thêm custom domain contoso.com vào tenant, tạo bản ghi TXT/MX tại DNS công khai của contoso.com, rồi Verify domain trong Entra ID."
+ },
+ {
+  "n": 83,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Event | search \"error\" là cú pháp KQL hợp lệ để tìm chuỗi \"error\" trong bảng Event."
+ },
+ {
+  "n": 84,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "Để zone Azure DNS được phân giải từ Internet, cập nhật NS records tại registrar trỏ về các Azure DNS name server được gán cho zone (delegation)."
+ },
+ {
+  "n": 85,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Role Storage File Data SMB Share * chỉ gán cho identity được đồng bộ (hybrid user/group) khi dùng AD DS authentication; user chỉ có trên cloud hoặc computer account không dùng được share-level permission này."
+ },
+ {
+  "n": 86,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Owner và Network Contributor tạo được subnet; chỉ Owner (hoặc User Access Administrator) mới gán được role cho người khác. Security Admin/Reader không quản lý VNet."
+ },
+ {
+  "n": 87,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Lock và tag áp dụng được ở subscription, resource group và resource; không áp dụng cho management group (lock/tag) theo cách đó."
+ },
+ {
+  "n": 88,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "File CSV của Bulk delete chỉ cần User principal name của từng user."
+ },
+ {
+  "n": 89,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Tag không kế thừa từ RG/subscription xuống resource; policy Append/Modify chỉ thêm tag cho resource không bị exclude khi tạo hoặc cập nhật; VNET1 bị exclude nên không nhận Tag4."
+ },
+ {
+  "n": 90,
+  "mod": "p3m8",
+  "status": "ok",
+  "vi": "Traffic Manager Contributor chỉ quản lý Traffic Manager profile, không có quyền cấu hình flow logs/Traffic Analytics."
+ },
+ {
+  "n": 91,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Administrative units giới hạn phạm vi của Entra role (ví dụ User Administrator) cho một tập user, phù hợp để uỷ quyền quản lý user theo từng văn phòng."
+ },
+ {
+  "n": 92,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Logic App Contributor trên RG Dev cho phép tạo và quản lý logic app trong Dev, đúng nguyên tắc least privilege."
+ },
+ {
+  "n": 93,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "User Access Administrator cho phép gán quyền truy cập cho người khác; Virtual Machine Contributor cho phép quản lý/xoá VM trong phạm vi được gán."
+ },
+ {
+  "n": 94,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Owner trên VNet1 bao gồm quyền roleAssignments/write nên User1 có thể gán Reader cho người khác trên VNet1."
+ },
+ {
+  "n": 95,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "dataActions định nghĩa thao tác data plane; assignableScopes định nghĩa các scope mà custom role có thể được gán."
+ },
+ {
+  "n": 96,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Phải bật identity-based authentication (AD DS) cho storage account trước, sau đó mới gán share-level role như Storage File Data SMB Share Elevated Contributor cho group được đồng bộ."
+ },
+ {
+  "n": 97,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Gán User Access Administrator ở root management group: kế thừa xuống mọi subscription hiện tại và tương lai, và chỉ có quyền quản lý role assignment (ít hơn Owner)."
+ },
+ {
+  "n": 98,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Policy có thể gán ở management group, subscription, resource group hoặc resource; exclusions chỉ được là các scope con nằm dưới scope gán."
+ },
+ {
+  "n": 99,
+  "mod": "p2m1",
+  "status": "ok",
+  "vi": "Người tạo tenant mới (User1) là Global Administrator duy nhất của tenant đó; vai trò của User2 ở contoso.onmicrosoft.com không có hiệu lực trong external.contoso.onmicrosoft.com."
+ },
+ {
+  "n": 100,
+  "mod": "p2m1",
+  "status": "ok",
+  "vi": "User4 không có quyền gì trong tenant mới; chỉ User1 (người tạo) mới quản lý được tenant cho đến khi cấp quyền cho người khác."
+ },
+ {
+  "n": 101,
+  "mod": "p2m1",
+  "status": "ok",
+  "vi": "User3 thuộc tenant cũ, không có role trong tenant mới nên không thể tạo user ở đó."
+ },
+ {
+  "n": 102,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Sửa custom role hiện có: thêm /subscriptions/Sub1 và /subscriptions/Sub2 vào AssignableScopes và bỏ RG1, ít công nhất."
+ },
+ {
+  "n": 103,
+  "mod": "p4m3",
+  "status": "ok",
+  "vi": "Storage Blob Data Contributor cho phép đọc và upload blob data; không gán được role, không sửa firewall (control plane) và không xem file share."
+ },
+ {
+  "n": 104,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Event | search \"error\" là KQL hợp lệ; \"where EventType is ...\" không phải cú pháp KQL, các lựa chọn còn lại là SQL/PowerShell."
+ },
+ {
+  "n": 105,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Website Contributor cho phép quản lý web app (bao gồm deploy) bằng danh tính Azure AD mà không cấp quyền quá mức như Owner; FTPS credentials không dùng Azure AD."
+ },
+ {
+  "n": 106,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Bulk invite users nhận CSV (email, redirect URL) và tạo guest B2B hàng loạt – đúng yêu cầu."
+ },
+ {
+  "n": 107,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Built-in Entra role không clone được (chỉ custom Entra role); Azure role (built-in hoặc custom) clone được để tạo custom Azure role."
+ },
+ {
+  "n": 108,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Reader and Data Access cho phép xem dữ liệu storage (qua account key); để gán role cho người khác cần role có quyền roleAssignments/write (Owner nếu không có User Access Administrator)."
+ },
+ {
+  "n": 109,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Service tag AzureKeyVault (có thể theo region, ví dụ AzureKeyVault.EastUS) làm destination của rule outbound; Microsoft tự cập nhật dải IP nên ít công quản trị."
+ },
+ {
+  "n": 110,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Group-based licensing không áp dụng cho nested group: chỉ member trực tiếp của Group1 (User1) và User4 được gán trực tiếp nhận license."
+ },
+ {
+  "n": 111,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Chỉ user từ connected organization (Fabrikam) mới yêu cầu được access package; lifecycle settings xác định guest bị block rồi bị xoá sau số ngày cấu hình."
+ },
+ {
+  "n": 112,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Owner trên VNet1 có quyền gán role nên User1 có thể gán Reader cho người khác trên VNet1."
+ },
+ {
+  "n": 113,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Role assignment cho group áp dụng cho thành viên của group; trong exhibit, nested group/Microsoft 365 group không mang lại quyền như các statement giả định."
+ },
+ {
+  "n": 114,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Owner trên VNet1 có quyền Microsoft.Authorization/roleAssignments/write; Contributor thì không."
+ },
+ {
+  "n": 115,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Private endpoint cấp cho storage1 một private IP trong VNet, nên traffic từ VM1 tới storage đi trên backbone Microsoft thay vì Internet công cộng."
+ },
+ {
+  "n": 116,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Quyền kế thừa từ resource group cho phép tạo storage account; sửa DNS settings của NIC cần quyền trên chính network interface (ví dụ Network Contributor), không có từ role trên NSG."
+ },
+ {
+  "n": 117,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "User Access Administrator (\"Access Administrator\") trên VNet1 cho phép gán role Reader cho người khác với least privilege."
+ },
+ {
+  "n": 118,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Role gán ở MG1 kế thừa xuống Sub1/Sub2: Group1 Reader xem được tài nguyên; User1 có User Access Administrator nên gán được role (kể cả Owner) trong phạm vi MG1, nhưng không ở Sub3."
+ },
+ {
+  "n": 119,
+  "mod": "p4m4",
+  "status": "ok",
+  "vi": "Trước khi gán Storage File Data SMB Share Contributor, phải bật identity-based access (AD DS/Entra Kerberos) cho file shares của storage1."
+ },
+ {
+  "n": 120,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "User Access Administrator trên VNet1 là role nhỏ nhất cho phép gán role Reader cho người khác."
+ },
+ {
+  "n": 121,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "License gán qua group không gỡ trực tiếp được cho user (phải gỡ khỏi group); nested group không nhận license; vẫn có thể gán thêm license/dịch vụ trực tiếp cho user."
+ },
+ {
+  "n": 122,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "JobTitle của user đồng bộ từ AD phải sửa on-premises (chỉ sửa được cho user cloud-only trong Entra ID); UsageLocation sửa được cho mọi user trong Entra ID."
+ },
+ {
+  "n": 123,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "New-MgUser tạo member user, không gửi lời mời B2B; để tạo guest cần New-MgInvitation."
+ },
+ {
+  "n": 124,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "New-MgInvitation (Microsoft Graph PowerShell) gửi lời mời B2B và tạo guest account; chạy theo vòng lặp trên file CSV là đúng cách."
+ },
+ {
+  "n": 125,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "User Access Administrator trên VNet1 cho phép gán role Reader cho user khác; Contributor/Network Contributor không có quyền gán role."
+ },
+ {
+  "n": 126,
+  "mod": "p2m5",
+  "status": "ok",
+  "vi": "Chỉ User Access Administrator (hoặc Owner) có quyền gán role; đây là lựa chọn least privilege."
+ },
+ {
+  "n": 127,
+  "mod": "p4m1",
+  "status": "outdated",
+  "vi": "Blob storage: AzCopy hỗ trợ cả Microsoft Entra ID và SAS. File storage: theo đáp án cũ chỉ dùng SAS.",
+  "note": "Docs hiện hành: với Azure Files, các lệnh nhắm vào file và directory đã có thể dùng Microsoft Entra ID thay cho SAS; chỉ các lệnh nhắm vào cả file share hoặc account (vd. azcopy make share) vẫn cần SAS. Vì vậy \"File: SAS only\" không còn chính xác hoàn toàn; Blob vẫn là Entra ID và SAS. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files",
+  "verified": true
+ },
+ {
+  "n": 128,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Trên Overview của guest user, dùng \"Reset redemption status\" (đặt lại trạng thái chấp nhận lời mời) và cập nhật email/identity để user redeem lại bằng tài khoản mới."
+ }
+]

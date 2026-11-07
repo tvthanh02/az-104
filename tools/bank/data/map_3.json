@@ -1,0 +1,799 @@
+[
+ {
+  "n": 257,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Storage account + SAS không phải nguồn dữ liệu cho log alert. Cần thu thập System event log vào Log Analytics workspace rồi tạo log search alert trong Azure Monitor."
+ },
+ {
+  "n": 258,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Không thể đổi VNet của VM có sẵn. Cách ít công nhất: xóa VM1 nhưng giữ lại Disk1, rồi tạo VM mới trong VNet2 dùng Disk1 làm OS disk (giữ nguyên ứng dụng đã cài)."
+ },
+ {
+  "n": 259,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Lưu mật khẩu dưới dạng secret trong Azure Key Vault (bật quyền cho template deployment / access policy) và tham chiếu secret từ parameter file, nên mật khẩu không nằm ở dạng plain text."
+ },
+ {
+  "n": 260,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Web app phải nằm trong App Service plan cùng region và đúng OS. ASP.NET Core chạy được trên Windows hoặc Linux (ASP1, ASP3); ASP.NET (Framework) chỉ chạy trên Windows (ASP1)."
+ },
+ {
+  "n": 261,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Autoscale: CPU ≥ 80% thì scale out +2 (4→6); CPU ≤ 30% thì scale in nhưng không xuống dưới minimum instance count (còn 2)."
+ },
+ {
+  "n": 262,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Dùng Custom Script Extension: upload script cấu hình (ví dụ cài IIS) và khai báo extension trong extensionProfile của ARM template của scale set để mọi instance tự cài khi provision."
+ },
+ {
+  "n": 263,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Lệnh az aks install-cli cài kubectl (và kubelogin) lên máy cục bộ có Azure CLI."
+ },
+ {
+  "n": 264,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Quy trình Azure Automation State Configuration: upload/import configuration → compile thành node configuration (MOF) → gán cho node và kiểm tra trạng thái compliance."
+ },
+ {
+  "n": 265,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Location trong resources đang được hard-code/không dùng biến nên phải sửa trực tiếp location trong phần resources thành westus thì VM mới được triển khai sang West US."
+ },
+ {
+  "n": 266,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Deployment slot chỉ có từ tier Standard trở lên, nên phải scale up App Service plan (đổi pricing tier), không phải scale out."
+ },
+ {
+  "n": 267,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Scale set 10 instance được phân bố qua 5 update domain (2 VM/UD); khi bảo trì theo kế hoạch chỉ một UD bị khởi động lại nên vẫn còn 8 VM chạy."
+ },
+ {
+  "n": 268,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Event subscription (Event Grid) không thu thập System event log của guest OS. Cần đưa event log vào Log Analytics workspace rồi tạo log alert."
+ },
+ {
+  "n": 269,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Chuyển VM sang subscription khác chỉ thay đổi vị trí quản lý/billing, không di chuyển VM sang host vật lý khác. Cần dùng Redeploy."
+ },
+ {
+  "n": 270,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Redeploy tắt VM, chuyển sang một node mới trong hạ tầng Azure rồi bật lại, giữ nguyên cấu hình (temp disk bị mất)."
+ },
+ {
+  "n": 271,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Bật Update Management chỉ để quản lý bản vá OS, không di chuyển VM sang host khác."
+ },
+ {
+  "n": 272,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Bước đầu tiên khi thêm custom domain là tạo DNS record (CNAME/A và TXT asuid để xác minh) tại nhà cung cấp DNS."
+ },
+ {
+  "n": 273,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Chuyển VM sang resource group khác không thay đổi VNet; NIC mới vẫn phải thuộc cùng VNet với NIC chính. Không thể đổi VNet của VM có sẵn."
+ },
+ {
+  "n": 274,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "VNet của VM không thể thay đổi sau khi tạo, nên phải xóa VM1 (giữ disk), tạo lại với network interface kết nối VNET2."
+ },
+ {
+  "n": 275,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Tắt VM rồi thêm NIC chỉ thêm được NIC trong cùng VNet với NIC hiện có; không chuyển VM sang VNET2 được."
+ },
+ {
+  "n": 276,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Quota vCPU theo region: tổng vCPU đang dùng cộng VM mới không được vượt giới hạn (20). Chỉ VM 1 vCPU còn vừa; VM 4 hoặc 16 vCPU vượt quota."
+ },
+ {
+  "n": 277,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "14 VM chia vào 10 update domain → tối đa 2 VM/UD offline khi bảo trì; chia vào 2 fault domain → mỗi FD 7 VM, sự cố rack ảnh hưởng 7 VM."
+ },
+ {
+  "n": 278,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Người dùng internet truy cập ứng dụng qua public IP của load balancer/ingress (131.107.2.1); các IP còn lại là địa chỉ private/nội bộ của cluster."
+ },
+ {
+  "n": 279,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Web app chạy trên App Service plan; một plan có thể chứa nhiều app, nên chỉ cần một App Service plan để tối thiểu chi phí."
+ },
+ {
+  "n": 280,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Container group có public IP/DNS label và mở port nên người dùng internet kết nối được từ mọi thiết bị; các giá trị khác đọc từ template (OS type, cổng, resources)."
+ },
+ {
+  "n": 281,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Resize VM (D4s v3 → D8s v3) thường yêu cầu khởi động lại VM nên gây downtime; thêm data disk, extension hay DSC không cần restart."
+ },
+ {
+  "n": 282,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Deploy bản cập nhật vào slot test, kiểm thử, sau đó swap slot để đưa lên production mà không gián đoạn."
+ },
+ {
+  "n": 283,
+  "mod": "p3m8",
+  "status": "outdated",
+  "vi": "Để ghi lại mọi kết nối thành công/thất bại tới VM1 cần flow logs của Network Watcher: tạo storage account, đăng ký resource provider Microsoft.Insights và bật flow logs (D, E, F); Network Watcher được bật tự động theo region.",
+  "note": "NSG flow logs sẽ retire 30/9/2027 và đã không cho tạo mới; hiện phải dùng Virtual network flow logs (vẫn cần storage account + Microsoft.Insights). Ý đáp án D, E, F vẫn đúng nhưng loại flow log nay là VNet flow logs. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview",
+  "verified": true
+ },
+ {
+  "n": 284,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Triển khai một scale set (Uniform/ScaleSetVM orchestration) với 5 instance là cách nhanh nhất thay vì tạo từng VM riêng lẻ."
+ },
+ {
+  "n": 285,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Không thể trộn app Windows và Linux trong cùng một App Service plan. ASP.NET 4.7 cần Windows, Ruby chỉ chạy Linux → tối thiểu 2 plan."
+ },
+ {
+  "n": 286,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Budget chỉ gửi cảnh báo, không dừng tài nguyên; budget scope là RG1 nên chỉ tính chi phí VM1, và mỗi ngưỡng chỉ gửi một thông báo mỗi kỳ."
+ },
+ {
+  "n": 287,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Programmatic deployment (Marketplace) không hiển thị lịch sử triển khai. Ngày giờ tạo xem tại RG1 > Deployments."
+ },
+ {
+  "n": 288,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Thêm NIC mới vào VM chỉ được nếu NIC thuộc cùng VNet với NIC chính; không thể chuyển VM sang VNET2 theo cách này."
+ },
+ {
+  "n": 289,
+  "mod": "p2m2",
+  "status": "ok",
+  "vi": "Khi join Microsoft Entra, người join thiết bị (User1) và Global Administrator (User2) được thêm vào nhóm local Administrators; Additional local administrators = None nên không có ai khác."
+ },
+ {
+  "n": 290,
+  "mod": "p2m3",
+  "status": "ok",
+  "vi": "Resource lock ReadOnly ngăn thay đổi/di chuyển tài nguyên trong RG đó; App Service có thể move giữa resource group/subscription nhưng không đổi region."
+ },
+ {
+  "n": 291,
+  "mod": "p2m4",
+  "status": "ok",
+  "vi": "Policy Append chỉ tác động lên resource được tạo/cập nhật sau khi gán và không áp lên resource group. RG1 giữ tag1; storage1 có tag3 và được append tag2."
+ },
+ {
+  "n": 292,
+  "mod": "p6m3",
+  "status": "ok",
+  "vi": "Rate limit của action group: email tối đa 100/giờ nên 60 email/giờ; SMS tối đa 1 tin/5 phút nên 12 SMS/giờ."
+ },
+ {
+  "n": 293,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Recovery Services vault chỉ backup VM cùng region với vault (resource group không quan trọng), nên chỉ các VM cùng region với Vault1."
+ },
+ {
+  "n": 294,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Cluster autoscaler của AKS cấu hình bằng az aks (create/update --enable-cluster-autoscaler) hoặc Azure portal."
+ },
+ {
+  "n": 295,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Image đã build sẵn trên máy trạm nên trước hết docker push lên Registry1 (sau khi az acr login), rồi AKS mới kéo image về."
+ },
+ {
+  "n": 296,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Proximity placement group phải cùng region với VMSS1; chỉ Proximity2 cùng region (West US)."
+ },
+ {
+  "n": 297,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Resource providers chỉ liệt kê provider đã đăng ký, không cho biết thời điểm tạo resource. Xem RG1 > Deployments."
+ },
+ {
+  "n": 298,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Automation script (Export template) chỉ xuất template hiện tại, không có ngày giờ triển khai. Xem RG1 > Deployments."
+ },
+ {
+  "n": 299,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "RG1 > Deployments hiển thị lịch sử deployment kèm thời gian tạo các resource được triển khai bằng template."
+ },
+ {
+  "n": 300,
+  "mod": "p6m3",
+  "status": "outdated",
+  "vi": "Theo đáp án cũ, Linux Diagnostic Extension (LAD) thu thập metrics và logs của Linux VM.",
+  "note": "Docs: \"Azure Diagnostics extension will be deprecated on March 31, 2026\" – Microsoft yêu cầu chuyển từ LAD/WAD sang Azure Monitor Agent (AMA) với Data Collection Rule để thu metrics và logs. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/diagnostics-linux",
+  "verified": true
+ },
+ {
+  "n": 301,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Rule có priority thấp hơn được xử lý trước: rule chặn port 50-60 chặn DNS (53) nhưng web (80) vẫn được phép; xóa rule đó thì truy cập được cả web và DNS."
+ },
+ {
+  "n": 302,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Availability Zone là các datacenter tách biệt; đặt mỗi VM ở một zone khác nhau để mất một datacenter vẫn còn 2 VM."
+ },
+ {
+  "n": 303,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Template lưu trong thư viện có giá trị cố định; khi deploy chỉ chọn subscription/resource group (và location) nên chỉ cấu hình được resource group."
+ },
+ {
+  "n": 304,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "App không hỗ trợ nhiều instance nên phải scale up: runbook đổi VM size sang size lớn hơn."
+ },
+ {
+  "n": 305,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "DSC extension (hoặc Custom Script Extension) trong ARM template của scale set dùng để cài và duy trì NGINX trên mọi instance."
+ },
+ {
+  "n": 306,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Với kubenet, pod nhận IP từ Pod CIDR (10.244.0.0/16) còn node dùng IP subnet của VNet; service dùng Service CIDR."
+ },
+ {
+  "n": 307,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Đánh giá rule autoscale theo duration và cool down: tăng/giảm từng instance mỗi chu kỳ, trong giới hạn min/max của App Service plan."
+ },
+ {
+  "n": 308,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Ổ D: là temporary disk; khi redeploy VM chuyển sang host mới nên dữ liệu trên D: bị mất, còn OS disk (C:) và cấu hình profile được giữ."
+ },
+ {
+  "n": 309,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Azure chỉ nhận VHD (fixed size); disk VHDX phải chuyển đổi sang VHD trước khi upload làm image/template."
+ },
+ {
+  "n": 310,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Đổi size scale set (upgrade policy Automatic) áp dụng cho cả 4 instance; automatic OS upgrade xử lý tối đa 20% instance mỗi lô, tối thiểu 1."
+ },
+ {
+  "n": 311,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Template của deployment được lưu trong lịch sử Deployments của resource group (RG1), không phải trên từng resource."
+ },
+ {
+  "n": 312,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Swap lại slot là cách nhanh nhất để quay về phiên bản trước vì phiên bản cũ đang nằm ở slot kia."
+ },
+ {
+  "n": 313,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Azure VM backup hỗ trợ File Recovery: chạy script mount recovery point trên máy Windows có OS tương thích có Internet; restore toàn bộ VM thì tạo VM mới hoặc thay disk."
+ },
+ {
+  "n": 314,
+  "mod": "p6m2",
+  "status": "ok",
+  "vi": "Pre-check Warning báo cấu hình có thể làm backup thất bại, ví dụ VM Agent không phải bản mới nhất; Critical là lỗi chắc chắn gây fail."
+ },
+ {
+  "n": 315,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Chuyển VM sang resource group khác chỉ là thay đổi logic, không di chuyển sang host khác. Cần Redeploy."
+ },
+ {
+  "n": 316,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Availability set tối đa 3 fault domain (tùy region) và 20 update domain; dùng giá trị lớn nhất để nhiều VM sẵn sàng nhất."
+ },
+ {
+  "n": 317,
+  "mod": "p6m3",
+  "status": "outdated",
+  "vi": "Thu System event log vào Log Analytics workspace bằng agent rồi tạo log search alert đếm số lỗi trong 1 giờ là đúng hướng (Yes).",
+  "note": "Log Analytics agent (Microsoft Monitoring Agent/MMA) đã deprecated từ 31/8/2024, không còn được hỗ trợ. Hiện dùng Azure Monitor Agent (AMA) + Data Collection Rule gửi Windows Event Log vào Log Analytics workspace rồi tạo log search alert. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/previous-versions/azure/azure-monitor/agents/log-analytics-agent",
+  "verified": true
+ },
+ {
+  "n": 318,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Mỗi chu kỳ autoscale = duration + cool down; tính số lần scale out/in trong khoảng thời gian, giới hạn bởi min/max."
+ },
+ {
+  "n": 319,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Không có giới hạn chạy plan Linux và Windows trong cùng region (đã gỡ bỏ từ 2021), nên ASP5 có thể đặt ở cả ba region."
+ },
+ {
+  "n": 320,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "DSC extension (hoặc Custom Script Extension) cài NGINX lên các VM của scale set khi triển khai bằng ARM template."
+ },
+ {
+  "n": 321,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Trong Cloud Shell, triển khai ARM template vào resource group bằng New-AzResourceGroupDeployment (hoặc az deployment group create) với tham số TemplateFile/TemplateUri."
+ },
+ {
+  "n": 322,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Triển khai file YAML vào AKS dùng kubectl apply -f; az aks dùng để quản lý cluster."
+ },
+ {
+  "n": 323,
+  "mod": "p6m3",
+  "status": "outdated",
+  "vi": "Với kiến trúc cũ cần Log Analytics workspace + agent trên VM + log alert; đáp án gốc (No) cho rằng thêm agent dưới dạng VM extension không đạt.",
+  "note": "MMA đã deprecated từ 31/8/2024. Lập luận của dump đáng ngờ: chính docs MMA liệt kê Log Analytics VM extension là một cách cài agent hợp lệ cho Azure VM, và AMA hiện nay chỉ cài qua VM extension. Cách hiện hành: AMA + DCR (Windows Event Log) + log search alert. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/previous-versions/azure/azure-monitor/agents/log-analytics-agent",
+  "verified": true
+ },
+ {
+  "n": 324,
+  "mod": "p6m3",
+  "status": "outdated",
+  "vi": "Log Analytics workspace thu event log qua agent, sau đó log search alert đếm số lỗi trong 1 giờ, nên giải pháp đạt (Yes).",
+  "note": "MMA đã deprecated từ 31/8/2024. Hiện dùng Azure Monitor Agent + Data Collection Rule gửi Windows Event Log vào Log Analytics workspace rồi tạo log search alert. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/previous-versions/azure/azure-monitor/agents/log-analytics-agent",
+  "verified": true
+ },
+ {
+  "n": 325,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Backup thư mục bằng MARS agent; để restore sang máy khác, cài Microsoft Azure Recovery Services agent trên VM2 rồi dùng Recover Data (Another server)."
+ },
+ {
+  "n": 326,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Dùng thuộc tính copy (property iteration) cho dataDisks và copyIndex() để tạo nhiều data disk với LUN/tên khác nhau."
+ },
+ {
+  "n": 327,
+  "mod": "p3m1",
+  "status": "ok",
+  "vi": "NIC phải cùng region với VM và VNet (West US); resource group có thể khác."
+ },
+ {
+  "n": 328,
+  "mod": "p3m1",
+  "status": "ok",
+  "vi": "NIC tạo ở Central US khác region với VM1/VNET2 (West US) nên không gắn được."
+ },
+ {
+  "n": 329,
+  "mod": "p3m1",
+  "status": "ok",
+  "vi": "NIC tạo trong RG2 nhưng ở West US vẫn gắn được vì chỉ yêu cầu cùng region và cùng VNet; resource group không quan trọng."
+ },
+ {
+  "n": 330,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Template tạo resource group nên là deployment ở scope subscription: dùng New-AzDeployment (alias New-AzSubscriptionDeployment)."
+ },
+ {
+  "n": 331,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Custom backup của App Service cần storage account/container trước; loại trừ thư mục bằng file _backup.filter đặt trong wwwroot."
+ },
+ {
+  "n": 332,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Custom Script Extension tải và chạy script cài NGINX trên mọi VM của scale set khi khai báo trong ARM template."
+ },
+ {
+  "n": 333,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Domain join bằng resource Microsoft.Compute/virtualMachines/extensions (JsonADDomainExtension); mật khẩu đặt trong protectedSettings để được mã hóa."
+ },
+ {
+  "n": 334,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Proximity placement group phải cùng region với VMSS1; theo bảng chỉ Proximity1 thỏa."
+ },
+ {
+  "n": 335,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Node pool Windows yêu cầu Azure CNI nên phải đổi network configuration; tích hợp xác thực dùng AKS-managed Microsoft Entra ID."
+ },
+ {
+  "n": 336,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Dùng az aks nodepool update với --max-surge 2 để upgrade dùng 2 node tạm thời thêm vào."
+ },
+ {
+  "n": 337,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "copy tạo 3 storage account trong RG1 với prefix tên; location lấy từ resourceGroup().location nên trùng với region của RG1."
+ },
+ {
+  "n": 338,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Custom Script Extension chạy script cài NGINX trên các VM của scale set khi triển khai qua ARM template."
+ },
+ {
+  "n": 339,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "New-AzResourceGroupDeployment -ResourceGroupName RG1 -Mode Complete xóa resource không có trong template rồi triển khai mới."
+ },
+ {
+  "n": 340,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Rule autoscale: khi CPU vượt ngưỡng trong suốt duration thì scale out thêm instance theo bước cấu hình, trong giới hạn min/max."
+ },
+ {
+  "n": 341,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Container group nhiều container chỉ hỗ trợ Linux; container Windows chỉ được deploy đơn lẻ, nên chỉ các instance Linux."
+ },
+ {
+  "n": 342,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Custom Script Extension là cách cài phần mềm (NGINX) tự động lên các VM của scale set khi triển khai."
+ },
+ {
+  "n": 343,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Azure Firewall chỉ dùng public IP Standard SKU, IPv4, static; các IP dynamic/Basic/IPv6 không dùng được."
+ },
+ {
+  "n": 344,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Dùng resourceId() để tham chiếu NIC hiện có và imageReference để chỉ định image OS trong storageProfile."
+ },
+ {
+  "n": 345,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Standard là tier rẻ nhất có autoscale (tối đa 10 instance) và custom domain; xác minh domain bằng TXT record (asuid)."
+ },
+ {
+  "n": 346,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Image version phải khớp VM generation của image definition và source VM phải cùng region với nguồn image."
+ },
+ {
+  "n": 347,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Không trộn Windows và Linux trong một plan: ASP.NET (Framework) cần Windows, Python chỉ chạy trên Linux → tối thiểu 2 plan."
+ },
+ {
+  "n": 348,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Deployment cấp subscription tạo resource group theo location trong template; location của deployment chỉ là nơi lưu metadata."
+ },
+ {
+  "n": 349,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Bộ nhớ >70% liên tục: mỗi lần scale out +1 sau duration và cool down, trong 30 phút đạt giới hạn tối đa 5 instance."
+ },
+ {
+  "n": 350,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Mỗi dịch vụ hỗ trợ OS/kiến trúc image khác nhau (ví dụ Container Apps chỉ Linux, ACI hỗ trợ cả Windows); chọn dịch vụ theo OS của image."
+ },
+ {
+  "n": 351,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "Để App Service nhập certificate từ Key Vault (access policy model), trước hết cấp quyền Get secret cho service principal Microsoft Azure App Service trong access policy của KV1."
+ },
+ {
+  "n": 352,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "VM tham chiếu trực tiếp NIC1 nên dependsOn của VM1 phải chứa NIC1 (NIC đã phụ thuộc VNet, IP, NSG)."
+ },
+ {
+  "n": 353,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Template có schema subscriptionDeploymentTemplate nên deploy bằng New-AzSubscriptionDeployment (New-AzDeployment)."
+ },
+ {
+  "n": 354,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "Resource group được chỉ định lúc deploy; trong file chỉ cần đặt location phù hợp (ví dụ resourceGroup().location) để triển khai storage1 vào RG1."
+ },
+ {
+  "n": 355,
+  "mod": "p1m2",
+  "status": "ok",
+  "vi": "copy index bắt đầu từ 0 nên tạo RG0..; lock CanNotDelete vẫn cho deploy vào RG, lock ReadOnly thì không."
+ },
+ {
+  "n": 356,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Proximity placement group phải cùng region với VMSS1; chỉ Proximity1 thỏa."
+ },
+ {
+  "n": 357,
+  "mod": "p5m4",
+  "status": "ok",
+  "vi": "VNet integration cho phép web app gọi ra tài nguyên trong VNet và VNet peer; NSG trên subnet integration không kiểm soát inbound tới app."
+ },
+ {
+  "n": 358,
+  "mod": "p6m1",
+  "status": "ok",
+  "vi": "Recovery Services vault chỉ backup VM cùng region với vault; resource group không ảnh hưởng."
+ },
+ {
+  "n": 359,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Khi bật Admin user cho ACR, username chính là tên registry (ContReg1)."
+ },
+ {
+  "n": 360,
+  "mod": "p5m5",
+  "status": "outdated",
+  "vi": "Theo đáp án cũ, bật Content trust (Docker Content Trust, chỉ có ở Premium) để push/pull image đã ký.",
+  "note": "Docs: từ 31/5/2026 không thể bật Docker Content Trust cho registry mới hoặc registry chưa từng bật; DCT sẽ bị gỡ hoàn toàn 31/3/2028. Microsoft khuyến nghị ký image bằng Notary Project (Notation) với key trong Azure Key Vault. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/container-registry/container-registry-content-trust",
+  "verified": true
+ },
+ {
+  "n": 361,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "ACR Tasks dùng được với mọi SKU; private endpoint chỉ có trên Premium SKU."
+ },
+ {
+  "n": 362,
+  "mod": "p5m2",
+  "status": "ok",
+  "vi": "Custom Script Extension cài NGINX lên các VM của scale set khi triển khai qua ARM template."
+ },
+ {
+  "n": 363,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Tài nguyên container group = tổng request; bỏ limit thì mỗi container chỉ dùng tối đa bằng request của mình nên không lấn sang CPU của container1."
+ },
+ {
+  "n": 364,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Azure Container Apps (scale rules/KEDA) và App Service (autoscale) tự động scale; ACI không có autoscale."
+ },
+ {
+  "n": 365,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Tạo registry bằng az acr create; đưa image lên bằng docker push (sau khi tag và az acr login)."
+ },
+ {
+  "n": 366,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Gán AcrPull cho ACR-Tasks-Network không cấp quyền cho danh tính đang deploy container instance, nên không giải quyết lỗi."
+ },
+ {
+  "n": 367,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Dedicated data endpoint chỉ phục vụ cấu hình firewall, không cấp quyền pull image cho ACI."
+ },
+ {
+  "n": 368,
+  "mod": "p5m5",
+  "status": "ok",
+  "vi": "Private endpoint chỉ thay đổi đường mạng tới registry, không giải quyết lỗi xác thực/quyền khi deploy ACI."
+ },
+ {
+  "n": 369,
+  "mod": "p5m3",
+  "status": "ok",
+  "vi": "Rules Based scale-out cho phép tạo rule autoscale theo metric như CPU > 80%; Automatic scaling dựa trên HTTP traffic, không theo CPU."
+ },
+ {
+  "n": 370,
+  "mod": "p5m4",
+  "status": "disputed",
+  "vi": "App Service chỉ import được certificate PKCS12 (PFX) từ Key Vault; Cert1 và Cert2 là PKCS#12 (RSA 2048/4096), còn Cert3, Cert4 là PEM nên không dùng được cho WebApp1.",
+  "note": "Đáp án đúng là B (Cert1 or Cert2 only). Docs: \"you can import a PKCS12 certificate into App Service from Key Vault\" và private certificate phải là PFX. Dump chọn D (Cert3/Cert4 – PEM) là sai.",
+  "source": "https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-certificate",
+  "verified": true
+ },
+ {
+  "n": 371,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Chuyển VM sang subscription khác không thay đổi host vật lý. Cần Redeploy."
+ },
+ {
+  "n": 372,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Redeploy trong Redeploy + reapply di chuyển VM sang node mới ngay lập tức."
+ },
+ {
+  "n": 373,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "One-time update chỉ cài bản vá OS, không chuyển VM sang host khác."
+ },
+ {
+  "n": 374,
+  "mod": "p5m1",
+  "status": "ok",
+  "vi": "Azure Disk Encryption với KEK được bật bằng Set-AzVMDiskEncryptionExtension (tham số -KeyEncryptionKeyUrl); KEK phải là key RSA vì ADE không hỗ trợ Elliptic Curve, nên chọn Key1 (RSA 4096).",
+  "source": "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-key-vault",
+  "verified": true
+ },
+ {
+  "n": 375,
+  "mod": "p3m7",
+  "status": "ok",
+  "vi": "Internal load balancer phân phối đều traffic giữa web tier và business tier; Application Gateway WAF chống SQL injection."
+ },
+ {
+  "n": 376,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Một Virtual WAN với 3 virtual hub (mỗi hub gần một văn phòng) kết nối các datacenter qua backbone Microsoft với độ trễ thấp."
+ },
+ {
+  "n": 377,
+  "mod": "p3m2",
+  "status": "ok",
+  "vi": "Một NIC có thể mang cả public và private IP nên cần 5 NIC; một NSG có thể gán cho subnet/nhiều NIC nên chỉ cần 1 NSG."
+ },
+ {
+  "n": 378,
+  "mod": "p3m6",
+  "status": "ok",
+  "vi": "Mỗi inbound NAT rule dùng cổng frontend 3389 cho một VM cần frontend IP riêng, nên phải thêm frontend IP address trước."
+ },
+ {
+  "n": 379,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "Auto registration chỉ tạo A record (IP private) cho VM trong VNet được link với registration enabled (VNET1)."
+ },
+ {
+  "n": 380,
+  "mod": "p3m8",
+  "status": "outdated",
+  "vi": "Theo đáp án cũ: lưu dữ liệu vào Log Analytics workspace và bật NSG flow logs trên NSG1 (kèm Traffic Analytics) để truy vấn tương tác IP kết nối tới ILB1.",
+  "note": "Basic Load Balancer đã retire 30/9/2025 và NSG flow logs không còn cho tạo mới (retire 30/9/2027). Hiện dùng Standard LB và Virtual network flow logs (bật trên VNet1/Subnet1) + Traffic Analytics vào Log Analytics workspace. Đề thi có thể vẫn chấm theo đáp án cũ.",
+  "source": "https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview",
+  "verified": true
+ },
+ {
+  "n": 381,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "VNet peering yêu cầu address space không chồng lấn; VNet2 trùng dải với VNet1 nên chỉ peer được VNet3 và VNet4."
+ },
+ {
+  "n": 382,
+  "mod": "p3m6",
+  "status": "disputed",
+  "vi": "Cần Standard internal LB (HA ports chỉ có ở Standard), một frontend + backend pool chứa 2 NVA + health probe; để có nhiều HA ports rule cho cùng backend pool thì mọi rule phải bật Floating IP và mỗi rule dùng frontend IP riêng.",
+  "note": "Đáp án đúng nên là B, C, E. Docs bảng Supported configurations: \"Multiple HA ports rules – Floating IP: Enabled for every rule\". Phương án D (Floating IP disabled) chỉ hợp lệ với một rule HA ports duy nhất.",
+  "source": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-ha-ports-overview",
+  "verified": true
+ },
+ {
+  "n": 383,
+  "mod": "p3m4",
+  "status": "ok",
+  "vi": "Sau khi thay đổi topology (thêm peering), client P2S phải tải và cài lại VPN client configuration package để nhận route tới VNet2."
+ },
+ {
+  "n": 384,
+  "mod": "p3m3",
+  "status": "ok",
+  "vi": "Private zone contoso.com link với VNET2 có auto registration nên VM1-VM3 tự đăng ký A record; public zone adatum.com không tự đăng ký."
+ }
+]

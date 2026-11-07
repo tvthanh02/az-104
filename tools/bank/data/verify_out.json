@@ -1,0 +1,470 @@
+[
+  {
+    "n": 6,
+    "mod": "p2m6",
+    "status": "outdated",
+    "vi": "Docs xác nhận không thể thay đổi usage model (per enabled user / per authentication) sau khi MFA provider đã được tạo, dù qua portal hay công cụ khác, nên đáp án B (No) đúng về mặt kỹ thuật.",
+    "note": "Đáp án B vẫn đúng nhưng kịch bản đã lỗi thời: từ 1/9/2018 không thể tạo MFA provider mới; MFA Server cũng đã ngừng hỗ trợ (30/9/2024). Hiện nay MFA đi kèm license Microsoft Entra ID P1/P2 và được bật bằng Conditional Access (hoặc Security defaults), không còn khái niệm usage model. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-authprovider",
+    "verified": true
+  },
+  {
+    "n": 7,
+    "mod": "p2m6",
+    "status": "outdated",
+    "vi": "Usage model của MFA provider không thể đổi sau khi tạo (docs: \"You can't change the usage model ... after an MFA provider is created\"), kể cả qua Azure CLI, nên đáp án là B (No).",
+    "note": "Đáp án B vẫn đúng nhưng khái niệm MFA provider/usage model đã lỗi thời: không tạo provider mới từ 1/9/2018, MFA Server ngừng hỗ trợ 30/9/2024. Hiện nay chỉ cần gán license Entra ID P1/P2 và dùng Conditional Access để yêu cầu MFA. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-authprovider",
+    "verified": true
+  },
+  {
+    "n": 8,
+    "mod": "p2m6",
+    "status": "outdated",
+    "vi": "Từ 1/9/2018 không thể tạo MFA auth provider mới và không còn hỗ trợ migration, nên giải pháp tạo provider mới từ bản backup không khả thi; đáp án B (No).",
+    "note": "Kịch bản dựa trên MFA provider/MFA Server đã khai tử (không tạo provider mới từ 1/9/2018; MFA Server ngừng 30/9/2024). Cách hiện hành: gán license Entra ID P1/P2 cho nhân viên mới và yêu cầu MFA qua Conditional Access. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-authprovider",
+    "verified": true
+  },
+  {
+    "n": 26,
+    "mod": "p3m4",
+    "status": "disputed",
+    "vi": "Docs P2S routing ghi rõ: khi thay đổi topology (thêm VNet peering), client Windows phải tải và cài lại VPN client package để nhận route mới. On-premises đã vào được VirtualNetworkB nên gateway transit đã hoạt động; chỉ còn thiếu bước cài lại client.",
+    "note": "Đáp án đúng là A (Yes). Docs: \"If you make a change to the topology of your network and have Windows VPN clients, the VPN client package for Windows clients must be downloaded and installed again\" (trang VNet peering cũng ghi P2S client phải tải lại sau khi cấu hình peering). Giải thích của dump (cần bật gateway transit) mâu thuẫn với dữ kiện on-premises đã truy cập được VirtualNetworkB.",
+    "source": "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-point-to-site-routing",
+    "verified": true
+  },
+  {
+    "n": 31,
+    "mod": "p3m1",
+    "status": "outdated",
+    "vi": "Với VM Resource Manager hiện nay, IP private tĩnh được đặt trên IP configuration của NIC (Assignment = Static) qua portal, Set-AzNetworkInterfaceIpConfig/Set-AzNetworkInterface hoặc az network nic ip-config update; không đặt IP tĩnh trong guest OS.",
+    "note": "Set-AzureStaticVNetIP là cmdlet Azure Service Management cho classic VM; classic resources và Azure Service Manager đã retire (classic VM 9/2023, ASM 31/8/2024). Cách hiện hành: portal NIC > IP configurations > Static (gần nhất với phương án C) hoặc Set-AzNetworkInterfaceIpConfig. Không chọn D vì docs khuyến cáo không gán IP private tĩnh trong OS. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/virtual-networks-static-private-ip",
+    "verified": true
+  },
+  {
+    "n": 37,
+    "mod": "p6m2",
+    "status": "ok",
+    "vi": "Azure VM backup hỗ trợ Windows 10/11 client 64-bit, Windows Server, các distro Linux được Azure endorse (Debian) và cả VM đang shut down/offline (snapshot crash-consistent), nên chọn tất cả A–E.",
+    "note": "Đáp án vẫn đúng. Lưu ý support matrix hiện liệt kê Windows Server 2016 trở lên và Linux theo danh sách endorsed distros (không còn ghi cụ thể WS2012 hay Debian 8.2); VM shut down được backup ở mức crash-consistent.",
+    "source": "https://learn.microsoft.com/en-us/azure/backup/backup-support-matrix-iaas",
+    "verified": true
+  },
+  {
+    "n": 40,
+    "mod": "p2m2",
+    "status": "outdated",
+    "vi": "Gửi lời mời B2B cho từng user trong CSV bằng cmdlet invitation sẽ tạo guest account trong contoso.com, nên giải pháp đạt mục tiêu (Yes).",
+    "note": "Ý tưởng vẫn đúng nhưng module AzureAD PowerShell (New-AzureADMSInvitation) đã deprecated từ 30/3/2024 và chỉ còn chạy tới 30/3/2025. Cmdlet hiện hành là New-MgInvitation (Microsoft Graph PowerShell) hoặc bulk invite trong Entra admin center. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/powershell/azure/active-directory/overview",
+    "verified": true
+  },
+  {
+    "n": 43,
+    "mod": "p2m5",
+    "status": "outdated",
+    "vi": "Trước đây Azure AD integration (legacy) chỉ bật được lúc tạo cluster nên phải recreate AKS1. Hiện nay AKS-managed Microsoft Entra integration bật được trên cluster đang chạy bằng az aks update --enable-aad.",
+    "note": "Docs hiện hành: \"Enable Microsoft Entra integration on your existing Kubernetes RBAC enabled cluster using az aks update\" và có thể migrate cluster legacy bằng cùng lệnh, nên không cần recreate cluster hay tạo OAuth endpoint. Đáp án B của dump vốn đã đáng ngờ (đáp án kinh điển cũ là C – Recreate AKS1). AKS hiện không còn là trọng tâm của AZ-104. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/aks/entra-id-control-plane-authentication",
+    "verified": true
+  },
+  {
+    "n": 127,
+    "mod": "p4m1",
+    "status": "outdated",
+    "vi": "Blob storage: AzCopy hỗ trợ cả Microsoft Entra ID và SAS. File storage: theo đáp án cũ chỉ dùng SAS.",
+    "note": "Docs hiện hành: với Azure Files, các lệnh nhắm vào file và directory đã có thể dùng Microsoft Entra ID thay cho SAS; chỉ các lệnh nhắm vào cả file share hoặc account (vd. azcopy make share) vẫn cần SAS. Vì vậy \"File: SAS only\" không còn chính xác hoàn toàn; Blob vẫn là Entra ID và SAS. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files",
+    "verified": true
+  },
+  {
+    "n": 140,
+    "mod": "p2m5",
+    "status": "outdated",
+    "vi": "Co-administrator là classic role chỉ gán được ở cấp subscription, nên theo đáp án cũ là C (Sub1).",
+    "note": "Classic administrator roles (Co-Administrator, Service Administrator) đã retire từ 31/8/2024; từ 12/2025 Azure tự chuyển thành Owner và từ 5/2026 tab Classic Administrators bị gỡ hẳn. Hiện nay dùng Azure RBAC (vd. Owner hoặc role hẹp hơn ở scope Sub1). Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/role-based-access-control/classic-administrators",
+    "verified": true
+  },
+  {
+    "n": 180,
+    "mod": "p4m1",
+    "status": "outdated",
+    "vi": "Blob storage: dùng Microsoft Entra ID hoặc SAS. File storage: theo đáp án cũ chỉ dùng SAS.",
+    "note": "AzCopy hiện hỗ trợ Microsoft Entra ID cho lệnh nhắm vào file/directory trên Azure Files; SAS chỉ còn bắt buộc khi lệnh nhắm vào cả share hoặc account. Đáp án \"Files: SAS only\" không còn chính xác theo docs; Blob vẫn là Entra ID và SAS. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files",
+    "verified": true
+  },
+  {
+    "n": 184,
+    "mod": "p4m4",
+    "status": "disputed",
+    "vi": "Hai thao tác thực hiện trong Azure subscription là tạo Storage Sync Service rồi tạo sync group (kèm cloud endpoint trỏ tới file share). Cài Azure File Sync agent và Run Server Registration là thao tác trên Server1.",
+    "note": "Đáp án hợp lý hơn: First = Create a Storage Sync Service, Second = Create a sync group. Theo deployment guide, agent được cài trên Windows Server (Server1), không phải trong subscription; sync group và cloud endpoint được tạo trong Storage Sync Service trên Azure.",
+    "source": "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-deployment-guide",
+    "verified": true
+  },
+  {
+    "n": 199,
+    "mod": "p4m2",
+    "status": "disputed",
+    "vi": "Object replication chỉ hỗ trợ general-purpose v2 và premium block blob account (cả source lẫn destination), cần bật blob versioning ở cả hai và change feed ở source; đối tượng cần tạo ở account mới là container.",
+    "note": "Account type đúng là \"StorageV2 only\" (trong các phương án có sẵn); legacy BlobStorage không được hỗ trợ (\"Both the source and destination accounts must be either general-purpose v2 or premium block blob accounts\"). Object type: Container (đúng như dump).",
+    "source": "https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview",
+    "verified": true
+  },
+  {
+    "n": 202,
+    "mod": "p4m1",
+    "status": "outdated",
+    "vi": "Theo đáp án cũ, khi copy giữa các account phải gắn SAS token cho cả source (container1) và destination (share1).",
+    "note": "Docs hiện hành: copy giữa storage accounts có thể dùng Microsoft Entra ID cho cả source và destination (cùng tenant) hoặc gắn SAS; với Azure Files, lệnh nhắm tới file/directory cũng đã hỗ trợ Entra ID. SAS/SAS vẫn chạy được nhưng không còn là bắt buộc. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-copy",
+    "verified": true
+  },
+  {
+    "n": 283,
+    "mod": "p3m8",
+    "status": "outdated",
+    "vi": "Để ghi lại mọi kết nối thành công/thất bại tới VM1 cần flow logs của Network Watcher: tạo storage account, đăng ký resource provider Microsoft.Insights và bật flow logs (D, E, F); Network Watcher được bật tự động theo region.",
+    "note": "NSG flow logs sẽ retire 30/9/2027 và đã không cho tạo mới; hiện phải dùng Virtual network flow logs (vẫn cần storage account + Microsoft.Insights). Ý đáp án D, E, F vẫn đúng nhưng loại flow log nay là VNet flow logs. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview",
+    "verified": true
+  },
+  {
+    "n": 300,
+    "mod": "p6m3",
+    "status": "outdated",
+    "vi": "Theo đáp án cũ, Linux Diagnostic Extension (LAD) thu thập metrics và logs của Linux VM.",
+    "note": "Docs: \"Azure Diagnostics extension will be deprecated on March 31, 2026\" – Microsoft yêu cầu chuyển từ LAD/WAD sang Azure Monitor Agent (AMA) với Data Collection Rule để thu metrics và logs. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/diagnostics-linux",
+    "verified": true
+  },
+  {
+    "n": 317,
+    "mod": "p6m3",
+    "status": "outdated",
+    "vi": "Thu System event log vào Log Analytics workspace bằng agent rồi tạo log search alert đếm số lỗi trong 1 giờ là đúng hướng (Yes).",
+    "note": "Log Analytics agent (Microsoft Monitoring Agent/MMA) đã deprecated từ 31/8/2024, không còn được hỗ trợ. Hiện dùng Azure Monitor Agent (AMA) + Data Collection Rule gửi Windows Event Log vào Log Analytics workspace rồi tạo log search alert. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/previous-versions/azure/azure-monitor/agents/log-analytics-agent",
+    "verified": true
+  },
+  {
+    "n": 323,
+    "mod": "p6m3",
+    "status": "outdated",
+    "vi": "Với kiến trúc cũ cần Log Analytics workspace + agent trên VM + log alert; đáp án gốc (No) cho rằng thêm agent dưới dạng VM extension không đạt.",
+    "note": "MMA đã deprecated từ 31/8/2024. Lập luận của dump đáng ngờ: chính docs MMA liệt kê Log Analytics VM extension là một cách cài agent hợp lệ cho Azure VM, và AMA hiện nay chỉ cài qua VM extension. Cách hiện hành: AMA + DCR (Windows Event Log) + log search alert. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/previous-versions/azure/azure-monitor/agents/log-analytics-agent",
+    "verified": true
+  },
+  {
+    "n": 324,
+    "mod": "p6m3",
+    "status": "outdated",
+    "vi": "Log Analytics workspace thu event log qua agent, sau đó log search alert đếm số lỗi trong 1 giờ, nên giải pháp đạt (Yes).",
+    "note": "MMA đã deprecated từ 31/8/2024. Hiện dùng Azure Monitor Agent + Data Collection Rule gửi Windows Event Log vào Log Analytics workspace rồi tạo log search alert. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/previous-versions/azure/azure-monitor/agents/log-analytics-agent",
+    "verified": true
+  },
+  {
+    "n": 360,
+    "mod": "p5m5",
+    "status": "outdated",
+    "vi": "Theo đáp án cũ, bật Content trust (Docker Content Trust, chỉ có ở Premium) để push/pull image đã ký.",
+    "note": "Docs: từ 31/5/2026 không thể bật Docker Content Trust cho registry mới hoặc registry chưa từng bật; DCT sẽ bị gỡ hoàn toàn 31/3/2028. Microsoft khuyến nghị ký image bằng Notary Project (Notation) với key trong Azure Key Vault. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/container-registry/container-registry-content-trust",
+    "verified": true
+  },
+  {
+    "n": 370,
+    "mod": "p5m4",
+    "status": "disputed",
+    "vi": "App Service chỉ import được certificate PKCS12 (PFX) từ Key Vault; Cert1 và Cert2 là PKCS#12 (RSA 2048/4096), còn Cert3, Cert4 là PEM nên không dùng được cho WebApp1.",
+    "note": "Đáp án đúng là B (Cert1 or Cert2 only). Docs: \"you can import a PKCS12 certificate into App Service from Key Vault\" và private certificate phải là PFX. Dump chọn D (Cert3/Cert4 – PEM) là sai.",
+    "source": "https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-certificate",
+    "verified": true
+  },
+  {
+    "n": 374,
+    "mod": "p5m1",
+    "status": "ok",
+    "vi": "Azure Disk Encryption với KEK được bật bằng Set-AzVMDiskEncryptionExtension (tham số -KeyEncryptionKeyUrl); KEK phải là key RSA vì ADE không hỗ trợ Elliptic Curve, nên chọn Key1 (RSA 4096).",
+    "note": "Docs: \"You must generate an RSA key type; Azure Disk Encryption doesn't currently support using Elliptic Curve keys.\" Key2 là EC P-256 nên bị loại.",
+    "source": "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-key-vault",
+    "verified": true
+  },
+  {
+    "n": 380,
+    "mod": "p3m8",
+    "status": "outdated",
+    "vi": "Theo đáp án cũ: lưu dữ liệu vào Log Analytics workspace và bật NSG flow logs trên NSG1 (kèm Traffic Analytics) để truy vấn tương tác IP kết nối tới ILB1.",
+    "note": "Basic Load Balancer đã retire 30/9/2025 và NSG flow logs không còn cho tạo mới (retire 30/9/2027). Hiện dùng Standard LB và Virtual network flow logs (bật trên VNet1/Subnet1) + Traffic Analytics vào Log Analytics workspace. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview",
+    "verified": true
+  },
+  {
+    "n": 382,
+    "mod": "p3m6",
+    "status": "disputed",
+    "vi": "Cần Standard internal LB (HA ports chỉ có ở Standard), một frontend + backend pool chứa 2 NVA + health probe; để có nhiều HA ports rule cho cùng backend pool thì mọi rule phải bật Floating IP và mỗi rule dùng frontend IP riêng.",
+    "note": "Đáp án đúng nên là B, C, E. Docs bảng Supported configurations: \"Multiple HA ports rules – Floating IP: Enabled for every rule\". Phương án D (Floating IP disabled) chỉ hợp lệ với một rule HA ports duy nhất.",
+    "source": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-ha-ports-overview",
+    "verified": true
+  },
+  {
+    "n": 386,
+    "mod": "p3m4",
+    "status": "outdated",
+    "vi": "Theo đáp án cũ: xoá peering, thêm address space 10.33.0.0/16 vào VNet1, rồi tạo lại peering.",
+    "note": "Hiện nay có thể thêm/sửa/xoá address range của VNet đang peering mà không downtime: thêm address space rồi chọn Sync trên peering (cho mỗi VNet remote). Trình tự xoá–thêm–tạo lại không còn bắt buộc. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/virtual-network/update-virtual-network-peering-address-space",
+    "verified": true
+  },
+  {
+    "n": 397,
+    "mod": "p3m3",
+    "status": "outdated",
+    "vi": "Azure CLI có lệnh import zone file nên chuyển 1.000 record với ít công sức nhất; Azure PowerShell không có cmdlet import/export.",
+    "note": "Docs hiện hành: \"Azure DNS supports importing and exporting zone files via the Azure CLI and the Azure portal\" (PowerShell vẫn không hỗ trợ). Vì vậy portal (C) cũng là cách hợp lệ; khẳng định \"chỉ CLI\" không còn đúng. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/dns/dns-import-export-portal",
+    "verified": true
+  },
+  {
+    "n": 399,
+    "mod": "p3m6",
+    "status": "outdated",
+    "vi": "Với Basic LB, backend pool chỉ gồm VM trong cùng một availability set hoặc scale set; Subnet12 chỉ dùng để cấp frontend IP cho ILB.",
+    "note": "Basic Load Balancer đã retire 30/9/2025; Standard LB cho phép bất kỳ VM nào trong cùng một VNet làm backend, nên các ô dựa trên giới hạn availability set của Basic không còn áp dụng. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/load-balancer/skus",
+    "verified": true
+  },
+  {
+    "n": 417,
+    "mod": "p3m6",
+    "status": "outdated",
+    "vi": "Theo đáp án cũ dựa trên Basic LB: backend phải cùng availability set/scale set và rule cần health probe để xác định backend khỏe.",
+    "note": "Basic Load Balancer đã retire 30/9/2025. Standard LB cho phép mọi VM trong cùng VNet và mặc định đóng inbound (\"closed to inbound flows unless allowed by a network security group\"), nên kết quả các ô có thể khác. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/load-balancer/skus",
+    "verified": true
+  },
+  {
+    "n": 432,
+    "mod": "p3m2",
+    "status": "disputed",
+    "vi": "Rule BlockAllOther443 (priority 200, source Any) chặn cả health probe từ AzureLoadBalancer (168.63.129.16) vì rule mặc định AllowAzureLoadBalancerInBound có priority 65001 xét sau. Probe fail nên LB không chuyển traffic; xoá rule này thì probe qua được và client 131.107.100.50 vẫn được allow ở priority 100.",
+    "note": "Đáp án đúng là A (Yes). Docs: phải cho phép 168.63.129.16 trong NSG, nếu không \"the health probe fails ... Azure Load Balancer marks your instance as down\". Lời giải thích \"vấn đề ở chỗ khác\" của dump không đúng.",
+    "source": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+    "verified": true
+  },
+  {
+    "n": 439,
+    "mod": "p3m6",
+    "status": "outdated",
+    "vi": "Basic LB: VM phải cùng availability set hoặc scale set; Standard LB: VM chỉ cần cùng một virtual network.",
+    "note": "Basic Load Balancer đã retire 30/9/2025; hiện chỉ dùng Standard LB nên vế về Basic không còn áp dụng. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/load-balancer/skus",
+    "verified": true
+  },
+  {
+    "n": 440,
+    "mod": "p3m4",
+    "status": "disputed",
+    "vi": "Mô hình dual-redundancy dùng 1 VPN gateway ở chế độ active-active (2 instance, mỗi instance một public IP) và 2 local network gateway + 2 connection cho 2 thiết bị on-premises, giúp failover nhanh hơn mức 1–3 phút của active-standby.",
+    "note": "Đáp án tối thiểu đúng: Public IP addresses = 2, Virtual network gateways = 1 (active-active), Local network gateways = 2. Docs: \"you set up the Azure VPN gateway in an active-active configuration. You create two local network gateways and two connections\". Dump ghi 2 virtual network gateway là sai.",
+    "source": "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-highlyavailable",
+    "verified": true
+  },
+  {
+    "n": 442,
+    "mod": "p3m2",
+    "status": "disputed",
+    "vi": "Rule allow source AzureLoadBalancer ở priority 150 được xét trước BlockAllOther443 (priority 200), nên health probe qua được, LB đánh dấu VM healthy và kết nối từ 131.107.100.50 (đã allow ở priority 100) thành công.",
+    "note": "Đáp án đúng là A (Yes), nhất quán với câu 432 cùng series (\"cost\" ở đây tương đương priority). Docs yêu cầu cho phép 168.63.129.16 (service tag AzureLoadBalancer) trong NSG để health probe hoạt động.",
+    "source": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+    "verified": true
+  },
+  {
+    "n": 446,
+    "mod": "p3m2",
+    "status": "outdated",
+    "vi": "Azure Bastion cần subnet riêng tên chính xác AzureBastionSubnet trong cùng VNet.",
+    "note": "Docs: với Bastion triển khai từ 2/11/2021, AzureBastionSubnet tối thiểu là /26 (hoặc lớn hơn). Đáp án 10.10.10.0/27 chỉ đúng với bản cũ; hiện cần chọn dải /26 trở lên. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/bastion/configuration-settings",
+    "verified": true
+  },
+  {
+    "n": 509,
+    "mod": "p5m5",
+    "status": "outdated",
+    "vi": "Đáp án cũ dựa trên Consumption-only environment (subnet tối thiểu /23): chỉ VNet3 còn chỗ cho /23 nên chọn VNet3 only, /23.",
+    "note": "Hiện nay Workload profiles environment chỉ cần subnet tối thiểu /27 (delegate cho Microsoft.App/environments). Với các phương án có sẵn, subnet nhỏ nhất hợp lệ là /26 và VNet1 (còn trống 10.1.129.0/24) hoặc VNet3 đều được, VNet2 đã hết chỗ: đáp án theo docs hiện hành là \"VNet1 or VNet3 only\" + /26. /23 chỉ còn đúng với Consumption-only. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/container-apps/custom-virtual-networks",
+    "verified": true
+  },
+  {
+    "n": 520,
+    "mod": "p6m1",
+    "status": "outdated",
+    "vi": "Sau khi tạo Recovery Services vault, cần chuẩn bị hạ tầng đích (virtual network) trước khi triển khai appliance và bật replication cho VM VMware.",
+    "note": "Kịch bản dựa trên ASR VMware classic (configuration server triển khai từ OVA), đã bị khai tử tháng 3/2026; hiện ASR dùng modernized replication appliance và để migrate VMware Microsoft khuyến nghị Azure Migrate. Đáp án D/C vốn còn tranh cãi; nắm ý: vault → chuẩn bị VNet đích → deploy appliance. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/site-recovery/vmware-physical-azure-classic-deprecation",
+    "verified": true
+  },
+  {
+    "n": 538,
+    "mod": "p3m8",
+    "status": "outdated",
+    "vi": "Theo đáp án cũ, Network Performance Monitor theo dõi latency giữa on-premises và Azure VM.",
+    "note": "Network Performance Monitor đã retire 29/2/2024 và không còn khả dụng; hiện dùng Connection monitor của Azure Network Watcher để đo latency/packet loss giữa on-premises và Azure VM. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/network-watcher/migrate-to-connection-monitor-from-network-performance-monitor",
+    "verified": true
+  },
+  {
+    "n": 564,
+    "mod": "p3m8",
+    "status": "outdated",
+    "vi": "Network Insights/Traffic Analytics phân tích flow logs, nên bước đầu tiên là bật flow logs gửi vào Workspace1.",
+    "note": "NSG flow logs đã không cho tạo mới và sẽ retire 30/9/2027; hiện cần cấu hình Virtual network flow logs (kèm Traffic Analytics) thay cho NSG flow logs. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview",
+    "verified": true
+  },
+  {
+    "n": 580,
+    "mod": "p3m8",
+    "status": "disputed",
+    "vi": "Connection monitor chỉ hỗ trợ máy on-premises đã onboard Azure Arc làm source endpoint; sau khi có Arc agent mới bật Azure Monitor Agent (extension, portal có thể tự cài).",
+    "note": "Theo docs hiện hành, thứ bắt buộc phải cài trên DC1 là Azure Connected Machine agent (Azure Arc) – phương án A: \"To monitor connectivity from the on-premises host, it must be enabled with Arc agent... You can escape the installation of the Azure Monitor Agent extension if you use the Azure portal... you still need to enable the Azure Arc agent\". AMA (D) là extension cài sau trên nền Arc. Đề thi cũ có thể chấm D.",
+    "source": "https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview",
+    "verified": true
+  },
+  {
+    "n": 581,
+    "mod": "p3m8",
+    "status": "outdated",
+    "vi": "Traffic Analytics phân tích flow logs; theo đáp án cũ cần bật NSG flow logs cho NSG1 gắn với NIC của VM1.",
+    "note": "NSG flow logs không còn cho tạo mới và sẽ retire 30/9/2027; hiện bật Virtual network flow logs cho VNet1 (hoặc subnet/NIC) và kích hoạt Traffic Analytics. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview",
+    "verified": true
+  },
+  {
+    "n": 582,
+    "mod": "p6m3",
+    "status": "outdated",
+    "vi": "Thu IIS logs bằng Azure Monitor Agent dựa trên Data Collection Rule với data source IIS Logs, gửi vào bảng W3CIISLog của Log Analytics workspace.",
+    "note": "Docs hiện hành: với AMA, DCE \"is only required if you're using Private Link\", và chỉ một số data source (Windows Firewall Logs, Prometheus) bắt buộc DCE; IIS logs không cần DCE. Bước cần thiết là tạo DCR với data source IIS Logs. Đáp án A theo yêu cầu cũ. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-endpoint-overview",
+    "verified": true
+  },
+  {
+    "n": 584,
+    "mod": "p3m8",
+    "status": "disputed",
+    "vi": "Traffic Analytics phân tích flow logs (lưu trong Azure Storage) và ghi kết quả đã xử lý vào Log Analytics workspace, nên cần Log Analytics workspace và storage account.",
+    "note": "Đáp án đúng nên là A và C. Các thành phần của Traffic Analytics là Network Watcher, Log Analytics workspace và flow logs (flow data \"is sent to Azure Storage\"); không cần tạo Data Collection Rule.",
+    "source": "https://learn.microsoft.com/en-us/azure/network-watcher/traffic-analytics",
+    "verified": true
+  },
+  {
+    "n": 587,
+    "mod": "p2m3",
+    "status": "outdated",
+    "vi": "Theo đáp án cũ, đổi Service Administrator trong Properties của subscription.",
+    "note": "Classic administrator (Service Administrator/Co-Administrator) đã retire 31/8/2024 và gỡ hẳn khỏi portal từ 5/2026; hiện gán Owner qua Access control (IAM) (phương án C) và nhận cảnh báo outage qua Service Health alert. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/role-based-access-control/classic-administrators",
+    "verified": true
+  },
+  {
+    "n": 594,
+    "mod": "p4m1",
+    "status": "outdated",
+    "vi": "Theo case study cũ, disk của VM dùng unmanaged standard storage (page blob) nên Box 1 là Yes.",
+    "note": "Unmanaged disks đã retire hoàn toàn ngày 31/3/2026 (gia hạn từ 30/9/2025); sau ngày này không thể start VM dùng unmanaged disks. VM hiện phải dùng managed disks nên nhận định về \"unmanaged standard storage\" không còn áp dụng. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/virtual-machines/unmanaged-disks-deprecation",
+    "verified": true
+  },
+  {
+    "n": 604,
+    "mod": "p3m6",
+    "status": "outdated",
+    "vi": "Với Basic LB, backend chỉ chấp nhận VM trong cùng một availability set; VM có sẵn không thể thêm vào availability set nên phải redeploy.",
+    "note": "Basic Load Balancer đã retire 30/9/2025. Standard LB chấp nhận \"any virtual machines or virtual machine scale sets in a single virtual network\", nên bước cần làm là đưa VM2 vào VNET1 (phương án B), không cần redeploy vào availability set. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/load-balancer/skus",
+    "verified": true
+  },
+  {
+    "n": 605,
+    "mod": "p3m6",
+    "status": "outdated",
+    "vi": "Với Basic LB, VM1 và VM2 phải nằm trong cùng availability set; availability set chỉ chọn được lúc tạo VM nên phải redeploy.",
+    "note": "Basic Load Balancer đã retire 30/9/2025. Với Standard LB, backend pool chỉ yêu cầu VM cùng VNet, nên đáp án hợp lý hiện nay là kết nối VM2 vào VNET1/Subnet1 (phương án A). Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/azure/load-balancer/skus",
+    "verified": true
+  },
+  {
+    "n": 611,
+    "mod": "p6m3",
+    "status": "disputed",
+    "vi": "Docs: độ trễ trung bình để ingest log data là dưới 10 giây sau khi tới endpoint; Azure Monitor Agent upload phần lớn dữ liệu trong dưới 1 phút. Vì vậy log từ VM thường truy vấn được trong khoảng dưới 1 phút.",
+    "note": "Đáp án C (5–10 phút) không khớp docs hiện hành. Phương án gần nhất là A (1 phút); 5–10 phút chỉ gần với resource logs của dịch vụ Azure (3–10 phút), không phải dữ liệu agent từ VM. Câu hỏi có vẻ tự tạo nên đáp án \"chuẩn\" không chắc chắn.",
+    "source": "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-ingestion-time",
+    "verified": true
+  },
+  {
+    "n": 615,
+    "mod": "p4m1",
+    "status": "ok",
+    "vi": "Dung lượng tối đa mặc định của standard storage account là 5 PiB; muốn vượt mức mặc định phải liên hệ Azure Support. Các phương án khác (đổi replication, Premium, HNS, nâng GPv2) không thay đổi giới hạn này.",
+    "note": "Lưu ý: 5 PB nhỏ hơn 5 PiB mặc định nên về lý thuyết không cần làm gì; trong các phương án có sẵn, E là đáp án hợp lý duy nhất.",
+    "source": "https://learn.microsoft.com/en-us/azure/storage/common/scalability-targets-standard-account",
+    "verified": true
+  },
+  {
+    "n": 619,
+    "mod": "p4m4",
+    "status": "ok",
+    "vi": "Map drive letter tới Azure file share dùng SMB qua TCP 445, cổng này hay bị ISP/tổ chức chặn; dùng VPN (S2S/P2S) hoặc ExpressRoute tới private endpoint giúp lưu lượng SMB đi qua đường hầm.",
+    "note": "Docs: \"For on-premises SMB clients, plan for a private endpoint with a VPN or ExpressRoute connection, unless you confirm that your network allows outbound TCP port 445 to Azure.\"",
+    "source": "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-networking-overview",
+    "verified": true
+  },
+  {
+    "n": 623,
+    "mod": "p6m2",
+    "status": "disputed",
+    "vi": "Vault1 là resource Microsoft.RecoveryServices đã được tạo thành công, nên resource provider đó đã được đăng ký; backup Azure VM không cần MARS agent hay scale set.",
+    "note": "Đáp án E đáng ngờ: docs ghi \"When you create a resource in the Azure portal, the portal typically registers the resource provider for you\", nên tạo được Vault1 nghĩa là Microsoft.RecoveryServices đã đăng ký. Phương án hợp lý hơn là D (cấp quyền RBAC, vd. Backup Contributor, trên Vault1). Câu hỏi có vẻ tự tạo; chưa có doc nào chốt đáp án D.",
+    "source": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types",
+    "verified": true
+  },
+  {
+    "n": 626,
+    "mod": "p6m3",
+    "status": "ok",
+    "vi": "Theo đáp án gốc, chọn Inter-facet discovery để troubleshooter phát hiện vấn đề cấu hình trên nhiều loại resource trong RG1.",
+    "note": "Không xác minh được: các thuật ngữ \"Azure Troubleshooter\", \"inter-facet discovery\", \"one-facet analysis\" không có trong Microsoft Learn. Câu hỏi có vẻ tự tạo; giữ nguyên đáp án D nhưng không nên học thuộc.",
+    "source": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/troubleshooting/overview",
+    "verified": false
+  },
+  {
+    "n": 635,
+    "mod": "p2m6",
+    "status": "outdated",
+    "vi": "User chưa có phương thức xác thực nào nên cần buộc họ đăng ký security info khi đăng nhập; combined registration cho phép đăng ký một lần cho cả MFA và SSPR.",
+    "note": "Combined registration đã được rollout cho mọi tenant và control chuyển đổi legacy/combined đã bị gỡ, nên không còn \"bật\" được. Hiện cần bật yêu cầu đăng ký SSPR khi sign-in (Password reset > Registration > Require users to register when signing in) hoặc dùng registration campaign. Đề thi có thể vẫn chấm theo đáp án cũ.",
+    "source": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-registration-mfa-sspr-combined",
+    "verified": true
+  },
+  {
+    "n": 637,
+    "mod": "p5m1",
+    "status": "disputed",
+    "vi": "Nếu size mới không có trên hardware cluster đang chứa availability set thì phải deallocate tất cả VM trong availability set rồi mới resize được.",
+    "note": "Đáp án đúng là A (Shut down VM1, VM2, VM3). Docs: \"If the new size for a VM in an availability set isn't available on the hardware cluster currently hosting the VM, then you need to deallocate all VMs in the availability set to resize the VM.\"",
+    "source": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/resize-vm",
+    "verified": true
+  }
+]
